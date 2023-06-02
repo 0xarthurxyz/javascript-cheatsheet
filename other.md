@@ -132,8 +132,34 @@ Some libraries for functional programming in JS:
 +   Lodash (https://lodash.com)
 +   Ramda (http://ramdajs.com)
 
+## What the heck is the event loop anyway? | Philip Roberts | JSConf EU
+
+Source:
+
+[![](https://img.youtube.com/vi/8aGhZQkoFbQ/0.jpg)](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
++   Transcript: [What the heck is the event loop anyway?][jsconf event loop transcript]
++   LinkedIn: [Philip Roberts][philip roberts linkedin]
+
+TLDR: Callbacks sitting in the callback queue only get back on the call stack when the call stack is 
+empty.
+
+JS runtime isn't only the engine (V8), it also has a heap (for memory), a call stack, 
+external WebAPIs you can call (or Node APIs in C++ for backend apps), a callback queue, and 
+an event loop.
+
+<img src="assets/images/js-architecture-event-loop.png" width="450">
+
+`setTimeout` is not guaranteed to run after the specified time, it is guaranteed to run at least 
+after the time specified if the call stack is empty ("it's a minimum delay not maximum delay").
+Example with `setTimeout(..., 0)` that only executes when the call stack is empty again and not
+after 0ms (immediately).
+
+
 <!-- Hyperlinks -->
 
 [realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
 [ideal hash trees paper]: https://lampwww.epfl.ch/papers/idealhashtrees.pdf
 [jsconf functional programming]: https://www.youtube.com/watch?v=e-5obm1G_FY
+[jsconf event loop transcript]: https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html
+[philip roberts linkedin]: https://www.linkedin.com/in/--philip-roberts--/?originalSubdomain=uk
