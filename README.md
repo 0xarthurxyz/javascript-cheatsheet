@@ -1,4 +1,4 @@
-# JavaScript - Cheat Sheet
+# JavaScript (Cheat Sheet)
 
 Context: These are noob notes on JavaScript/TypeScript (mostly notes-to-self). They are incomplete by default.
 
@@ -941,27 +941,8 @@ and now for some HTML;
 <body>
     <p class="my-first-class">This is the first line</p>
     <p class="my-first-class">This is the second line</p>
-</body>
+</body>x
 ```
-
-## JavaScript for pythonistas
-
-|                    | Python                   | JavaScript                    |
-|--------------------|--------------------------|-------------------------------|
-| Code Editor / IDE  | PyCharm, VS Code         | Atom, VS Code, WebStorm       |
-| Code Formatter     | black                    | Prettier                      |
-| Dependency Manager | Pipenv, poetry           | bower (deprecated), npm, yarn |
-| Documentation Tool | Sphinx                   | JSDoc, sphinx-js              |
-| Interpreter        | bpython, ipython, python | node                          |
-| Library            | requests, dateutil       | axios, moment                 |
-| Linter             | flake8, pyflakes, pylint | eslint, tslint                |
-| Package Manager    | pip, twine               | bower (deprecated), npm, yarn |
-| Package Registry   | PyPI                     | npm                           |
-| Package Runner     | pipx                     | npx                           |
-| Runtime Manager    | pyenv                    | nvm                           |
-| Scaffolding Tool   | cookiecutter             | cookiecutter, Yeoman          |
-| Test Framework     | doctest, nose, pytest    | Jasmine, Jest, Mocha          |
-| Web Framework      | Django, Flask, Tornado   | Angular, React, Vue.js        |
 
 Source: [therealpython][realpython javascript vs python]
 
@@ -981,4 +962,3 @@ Source: [therealpython][realpython javascript vs python]
 [tanStack table]: https://tanstack.com/table/v8/docs/guide/introduction
 [stack overflow css dot notation]: https://stackoverflow.com/a/25174773
 [yarn npm difference]: https://dev.to/samithawijesekara/the-difference-between-npm-and-yarn-2j3p
-[realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
