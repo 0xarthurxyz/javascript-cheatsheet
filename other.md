@@ -134,7 +134,7 @@ Some libraries for functional programming in JS:
 
 ## What the heck is the event loop anyway? | Philip Roberts | JSConf EU
 
-Source:
+Source: [What the heck is the event loop anyway?][jsconf event loop]
 
 [![](https://img.youtube.com/vi/8aGhZQkoFbQ/0.jpg)](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
@@ -163,3 +163,4 @@ after 0ms (immediately).
 [jsconf functional programming]: https://www.youtube.com/watch?v=e-5obm1G_FY
 [jsconf event loop transcript]: https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html
 [philip roberts linkedin]: https://www.linkedin.com/in/--philip-roberts--/?originalSubdomain=uk
+[jsconf event loop]: https://www.youtube.com/watch?v=8aGhZQkoFbQ
