@@ -19,6 +19,10 @@
 | Test Framework     | doctest, nose, pytest    | Jasmine, Jest, Mocha          |
 | Web Framework      | Django, Flask, Tornado   | Angular, React, Vue.js        |
 
+## Learning Functional Programming with JavaScript - JSUnconf
+
+Source: [YouTube] Learning Functional Programming with JavaScript - Anjana Vakil - JSUnconf
+
 <!-- Hyperlinks -->
 
 [realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
