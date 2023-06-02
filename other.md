@@ -21,7 +21,10 @@
 
 ## Learning Functional Programming with JavaScript - JSUnconf
 
-Source: [YouTube] Learning Functional Programming with JavaScript - Anjana Vakil - JSUnconf
+Source: [Learning Functional Programming with JavaScript][jsconf functional programming] - Anjana 
+Vakil - JSUnconf
+
+[![](https://img.youtube.com/vi/e-5obm1G_FY/0.jpg)](https://www.youtube.com/watch?v=e-5obm1G_FY)
 
 Slides:
 
@@ -133,3 +136,4 @@ Some libraries for functional programming in JS:
 
 [realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
 [ideal hash trees paper]: https://lampwww.epfl.ch/papers/idealhashtrees.pdf
+[jsconf functional programming]: https://www.youtube.com/watch?v=e-5obm1G_FY
