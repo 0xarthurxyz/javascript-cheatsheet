@@ -283,12 +283,27 @@ export default function greeter(name) {
 ```
 
 Declaration files are handy because they can be shared across multiple repos. 
-This is how types for React (`@types/react`) come about and are shared. 
-They are made and maintained on Github [`DefinitelyTyped/DefinitelyTyped`][DefinitelyTyped github].
+This is how types for React (`@types/react`) and others (`@types/*`) come about. 
+They are maintained by a community on Github [`DefinitelyTyped/DefinitelyTyped`][types repo github].
 
-![](assets/images/npm-ts-declaration-file.png)
+<img src="assets/images/npm-ts-declaration-file.png" width="300">
 
-![](assets/images/react-ts-types.png)
+<img src="assets/images/react-ts-types.png" width="300">
+
+This works well for public npm packages, for internal npm packages they mirrored the 
+DefinitelyTyped pattern and saved all internal types at `@airbnb-types/*` 
+(see GitHub repo: [brieb/types-starter][types starter github repo]).
+
+Brie read tons of postmortems to see if JavaScript related problems could have been prevented
+with TypeScript. Examples:
+
++   Missing parameters in function calls can be prevented with "Expected 1 argument, but got 0"
++   Strict null-checking 
+    +   "Object is possibly 'null' or 'undefined'"
+    +   "Cannot invoke an object which is possibly 'null' or 'undefined'"
++   Type mismatches "Type '...' is not assignable to type '...'"
+
+Brie found that 38% of Airbnb bugs were preventable with TypeScript according to postmortems.
 
 <!-- Hyperlinks -->
 
@@ -304,4 +319,5 @@ They are made and maintained on Github [`DefinitelyTyped/DefinitelyTyped`][Defin
 [jsconf v8 video]: https://www.youtube.com/watch?v=p-iiEDtpy6I
 [AST wikipedia]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
 [jsconf adopting typescript video]: https://www.youtube.com/watch?v=P-J9Eg7hJwE
-[DefinitelyTyped github]: https://github.com/DefinitelyTyped/DefinitelyTyped
+[types repo github]: https://github.com/DefinitelyTyped/DefinitelyTyped
+[types starter github repo]: https://github.com/brieb/types-starter
