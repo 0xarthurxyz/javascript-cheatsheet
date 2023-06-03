@@ -831,15 +831,12 @@ const getReleasedAmountReceipt =
 console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 ```
 
-### State changing methods
+Things to learn:
 
-### Listening to events
-
-### Query historic events
-
-### Signing Messages
-
-### API
++   State changing methods
++   Listening to events
++   Query historic events
++   Signing Messages
 
 <!-- Hyperlinks -->
 
