@@ -329,6 +329,12 @@ Nice to have:
 +   Understand what event loop looks like and how it works (browser and node)
 +   Basic React
 
+## How I Learned To Stop Worrying And Trust The Compiler - Felix Rieseberg - Node Summit
+
++   YouTube: [How I Learned To Stop Worrying And Trust The Compiler][TS Node Sumit Felix Slack]
+
+[![](https://img.youtube.com/vi/mgTenYbX2Kw/0.jpg)](https://www.youtube.com/watch?v=mgTenYbX2Kw)
+
 <!-- Hyperlinks -->
 
 [realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
