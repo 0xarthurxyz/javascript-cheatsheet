@@ -313,6 +313,21 @@ Some tips on large migrations:
 +   gradually introduce change
 +   provide a migration path
 
+## Some things to learn
+
+Must have:
+
++   Basic Jest testing framework
++   Basic JS programming patterns (e.g. closures, promises, async/await)
++   TypeScript typing function parameters and return types
++   Basic Express.js
++   Basic MongoDB (mongoose)
+
+Nice to have:
+
++   New programming patterns (differences between ES5 vs ES6)
++   Understand what event loop looks like and how it works (browser and node)
++   Basic React
 
 <!-- Hyperlinks -->
 
