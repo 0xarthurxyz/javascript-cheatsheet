@@ -843,18 +843,6 @@ console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 
 ## Raw notes
 
-### Dynamic table libraries
-
-> + [React-data-grid][React-data-grid] (very impressive)
-> + [Rsuite-table][Rsuite-table] (very impressive)
-> + [react-table][react-table]
-> + [Material-ui-table][Material-ui-table]
-> + [React-bootstrap-table][React-bootstrap-table]
-> + [ka-table][ka-table]
-> + [tanStack table][tanStack table]
-
-Source: [copycat.dev - react table][copycat dev]
-
 ## NPM - react-data-grid
 
 Demo: https://adazzle.github.io/react-data-grid/#/common-features
@@ -929,13 +917,5 @@ and now for some HTML;
 <!-- Hyperlinks -->
 
 [stackdiary require import]: https://stackdiary.com/require-vs-import-in-javascript/
-[copycat dev]: https://www.copycat.dev/blog/react-table/
-[React-data-grid]: https://adazzle.github.io/react-data-grid/#/common-features
-[react-table]: https://react-table-v7.tanstack.com/docs/installation
-[Material-ui-table]: https://material-table.com/#/docs/get-started
-[Rsuite-table]: https://rsuitejs.com/components/table/
-[React-bootstrap-table]: https://react-bootstrap-table.github.io/react-bootstrap-table2/
-[ka-table]: https://ka-table.com/
-[tanStack table]: https://tanstack.com/table/v8/docs/guide/introduction
 [stack overflow css dot notation]: https://stackoverflow.com/a/25174773
 [yarn npm difference]: https://dev.to/samithawijesekara/the-difference-between-npm-and-yarn-2j3p

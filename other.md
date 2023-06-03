@@ -43,6 +43,29 @@ Source: [MDN docs][mdn display flex]
 [lama dev 3 projects]: https://www.youtube.com/watch?v=uDeb2iwZMkA&t=1620s
 [mdn display flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout
 
+### Dynamic table libraries
+
+> + [React-data-grid][React-data-grid] (very impressive)
+> + [Rsuite-table][Rsuite-table] (very impressive)
+> + [react-table][react-table]
+> + [Material-ui-table][Material-ui-table]
+> + [React-bootstrap-table][React-bootstrap-table]
+> + [ka-table][ka-table]
+> + [tanStack table][tanStack table]
+
+Source: [copycat.dev - react table][copycat dev]
+
+<!-- Hyperlinks -->
+
+[copycat dev]: https://www.copycat.dev/blog/react-table/
+[React-data-grid]: https://adazzle.github.io/react-data-grid/#/common-features
+[react-table]: https://react-table-v7.tanstack.com/docs/installation
+[Material-ui-table]: https://material-table.com/#/docs/get-started
+[Rsuite-table]: https://rsuitejs.com/components/table/
+[React-bootstrap-table]: https://react-bootstrap-table.github.io/react-bootstrap-table2/
+[ka-table]: https://ka-table.com/
+[tanStack table]: https://tanstack.com/table/v8/docs/guide/introduction
+
 ## Learning Functional Programming with JavaScript - JSUnconf
 
 Source: [Learning Functional Programming with JavaScript][jsconf functional programming] - Anjana 
