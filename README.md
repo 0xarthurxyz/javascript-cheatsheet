@@ -841,72 +841,7 @@ console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 
 ### API
 
-## Raw notes
-
-## CSS
-
-### Dot Notation Naming Convention
-
-Source: [Stack Overflow][stack overflow css dot notation]
-
-A dot in css is for what is called a class.
-
-They can be called almost anything, for example in your CSS you would create a class and add 
-style for it (in this case, I'm making the background black);
-
-```css
-.my-first-class {
-    background-color: #000;
-    ...
-}
-```
-
-and to apply this class to an HTML element, you would do the following
-
-```html
-<body class="my-first-class">
-    ...
-</body>
-```
-
-this would mean the body of the page would become black.
-
-Now, you can create classes for CSS style or you can reference HTML elements directly, 
-for example (CSS again);
-
-```css
-body {
-    background-color: #000;
-}
-```
-
-would directly reference the `<body>` element on the page and do the same again.
-
-The main difference between the two is that CSS classes are reusable. 
-By comparison, referencing the HTML tag directly will affect all tags on the page 
-(that are the same), for example (CSS again);
-
-```css
-body {
-    background-color: #000;
-}
-
-.my-first-class {
-    background-color: #FFF;
-}
-```
-
-and now for some HTML;
-
-```html
-<body>
-    <p class="my-first-class">This is the first line</p>
-    <p class="my-first-class">This is the second line</p>
-</body>x
-```
-
 <!-- Hyperlinks -->
 
 [stackdiary require import]: https://stackdiary.com/require-vs-import-in-javascript/
-[stack overflow css dot notation]: https://stackoverflow.com/a/25174773
 [yarn npm difference]: https://dev.to/samithawijesekara/the-difference-between-npm-and-yarn-2j3p
