@@ -843,24 +843,6 @@ console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 
 ## Raw notes
 
-### Lama Dev - Simple JS projects
-
-Github: 0xarthurxyz/[vanilla-js-css-html][lama dev 3 projects github]
-
-Source: Youtube - [3 Javascript Projects Every Beginner Should Build][lama dev 3 projects]
-
-[![](https://img.youtube.com/vi/uDeb2iwZMkA/0.jpg)](https://www.youtube.com/watch?v=uDeb2iwZMkA)
-
-```css
-display: flex
-```
-
-> In the flex layout model, the children of a flex container can be laid out in any direction, 
-> and can "flex" their sizes, either growing to fill unused space or shrinking to avoid overflowing 
-> the parent. Both horizontal and vertical alignment of the children can be easily manipulated.
-
-Source: [MDN docs][mdn display flex]
-
 ### Dynamic table libraries
 
 > + [React-data-grid][React-data-grid] (very impressive)
@@ -944,14 +926,9 @@ and now for some HTML;
 </body>x
 ```
 
-Source: [therealpython][realpython javascript vs python]
-
 <!-- Hyperlinks -->
 
 [stackdiary require import]: https://stackdiary.com/require-vs-import-in-javascript/
-[lama dev 3 projects]: https://www.youtube.com/watch?v=uDeb2iwZMkA&t=1620s
-[lama dev 3 projects github]: https://github.com/0xarthurxyz/vanilla-js-css-html
-[mdn display flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout
 [copycat dev]: https://www.copycat.dev/blog/react-table/
 [React-data-grid]: https://adazzle.github.io/react-data-grid/#/common-features
 [react-table]: https://react-table-v7.tanstack.com/docs/installation
