@@ -220,11 +220,75 @@ Inspect compiler code with Node.js or Chrome:
 
 ## Adopting Typescript at Scale - Brie Bunge | JSConf Hawaii 2019
 
-+   Video: YouTube - [Adopting Typescript at Scale][jsconf adopting typescript video]
-
-[![](https://img.youtube.com/vi/5kOzF5KpVY0/0.jpg)](https://www.youtube.com/watch?v=5kOzF5KpVY0)
++   YouTube: [Adopting Typescript at Scale][jsconf adopting typescript video]
 
 [![](https://img.youtube.com/vi/P-J9Eg7hJwE/0.jpg)](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
+
+Parameter types:
+
+```js
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+```
+
+```ts
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greeter('JSConf Hawaii'); // compiles fine
+greeter(['JSConf', 'Hawaii']); // compile error
+```
+
+Types of other objects:
+
+```ts
+interface Person {
+    firstName: string;
+    lastName: string;
+}
+
+function greet(person: Person) {
+    return `Hello, ${person.firstName} ${person.lastName}!`;
+}
+```
+
+Great editor integrations with autocompletion and typechecking.
+
+
+At Airbnb they have 2m+ lines of JS code and 100+ internal npm packages.
+1300+ engineers of which 200+ are frontend engineers.
+
+Reasons they were interested in TS:
+
++   Fewer bugs (which stand in the way of helping users)
++   Better developer experience
++   end-to-end type safety (from backend API to frontend app)
+
+Type script declaration files (`.d.ts`) are used to describe the shape of JS code.
+This helped Airbnb circumvent the circular dependency problem between JS and TS code, 
+e.g. the repo depending on npm packages that are written in JS (i.e. without type safety).
+
+```ts
+// .d.ts file
+export default function greeter(name: string): string;
+```
+
+```js
+// .js file
+export default function greeter(name) {
+    return `Hello, ${name}!`;
+}
+```
+
+Declaration files are handy because they can be shared across multiple repos. 
+This is how types for React (`@types/react`) come about and are shared. 
+They are made and maintained on Github [`DefinitelyTyped/DefinitelyTyped`][DefinitelyTyped github].
+
+![](assets/images/npm-ts-declaration-file.png)
+
+![](assets/images/react-ts-types.png)
 
 <!-- Hyperlinks -->
 
@@ -240,3 +304,4 @@ Inspect compiler code with Node.js or Chrome:
 [jsconf v8 video]: https://www.youtube.com/watch?v=p-iiEDtpy6I
 [AST wikipedia]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
 [jsconf adopting typescript video]: https://www.youtube.com/watch?v=P-J9Eg7hJwE
+[DefinitelyTyped github]: https://github.com/DefinitelyTyped/DefinitelyTyped
