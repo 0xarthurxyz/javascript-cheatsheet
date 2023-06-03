@@ -843,15 +843,6 @@ console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 
 ## Raw notes
 
-## NPM - react-data-grid
-
-Demo: https://adazzle.github.io/react-data-grid/#/common-features
-
-Code examples: 
-
-+ All features: https://github.com/adazzle/react-data-grid/blob/main/website/demos/AllFeatures.tsx
-+ Common features: https://github.com/adazzle/react-data-grid/blob/main/website/demos/CommonFeatures.tsx
-
 ## CSS
 
 ### Dot Notation Naming Convention

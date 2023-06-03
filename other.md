@@ -55,6 +55,15 @@ Source: [MDN docs][mdn display flex]
 
 Source: [copycat.dev - react table][copycat dev]
 
+## NPM - `react-data-grid`
+
+Demo: https://adazzle.github.io/react-data-grid/#/common-features
+
+Code examples: 
+
++ All features: https://github.com/adazzle/react-data-grid/blob/main/website/demos/AllFeatures.tsx
++ Common features: https://github.com/adazzle/react-data-grid/blob/main/website/demos/CommonFeatures.tsx
+
 <!-- Hyperlinks -->
 
 [copycat dev]: https://www.copycat.dev/blog/react-table/
