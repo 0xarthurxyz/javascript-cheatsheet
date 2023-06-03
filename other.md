@@ -218,6 +218,14 @@ Inspect compiler code with Node.js or Chrome:
 +   `—trace-ic`: different object types a call sites encounters
 +   `—trace-opt` and `—trace-deopt`: which functions are (de)optimized
 
+## Adopting Typescript at Scale - Brie Bunge | JSConf Hawaii 2019
+
++   Video: YouTube - [Adopting Typescript at Scale][jsconf adopting typescript video]
+
+[![](https://img.youtube.com/vi/5kOzF5KpVY0/0.jpg)](https://www.youtube.com/watch?v=5kOzF5KpVY0)
+
+[![](https://img.youtube.com/vi/P-J9Eg7hJwE/0.jpg)](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
+
 <!-- Hyperlinks -->
 
 [realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
@@ -231,3 +239,4 @@ Inspect compiler code with Node.js or Chrome:
 [jsconf v8 pdf slides]: /assets/pdf/JSConfEU2017-v8-fhinkel.pdf
 [jsconf v8 video]: https://www.youtube.com/watch?v=p-iiEDtpy6I
 [AST wikipedia]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
+[jsconf adopting typescript video]: https://www.youtube.com/watch?v=P-J9Eg7hJwE
