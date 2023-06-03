@@ -305,6 +305,15 @@ with TypeScript. Examples:
 
 Brie found that 38% of Airbnb bugs were preventable with TypeScript according to postmortems.
 
+[ASTExplorer.net][AST explorer js to ts] for exploring ASTs of JS and TS code.
+
+Some tips on large migrations:
+
++   gather evidence and support
++   gradually introduce change
++   provide a migration path
+
+
 <!-- Hyperlinks -->
 
 [realpython javascript vs python]: https://realpython.com/python-vs-javascript/#ecosystem
@@ -321,3 +330,5 @@ Brie found that 38% of Airbnb bugs were preventable with TypeScript according to
 [jsconf adopting typescript video]: https://www.youtube.com/watch?v=P-J9Eg7hJwE
 [types repo github]: https://github.com/DefinitelyTyped/DefinitelyTyped
 [types starter github repo]: https://github.com/brieb/types-starter
+[AST explorer js to ts]: https://astexplorer.net/
+[TS Node Sumit Felix Slack]: https://www.youtube.com/watch?v=mgTenYbX2Kw
