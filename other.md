@@ -489,6 +489,51 @@ Nice to have:
 
 [![](https://img.youtube.com/vi/mgTenYbX2Kw/0.jpg)](https://www.youtube.com/watch?v=mgTenYbX2Kw)
 
+`tsc -init` to initialise a typescript project. This simply creates a `tsconfig.json` file.
+
+<img src="assets/images/ts-config-example.png" width="500">
+
+`tsc -w` to watch for changes and compile TS to JS automatically (so you can see changes as you go).
+
+<img src="assets/images/ts-watch-example.png" width="500">
+
+Example used in the talk:
+
+```ts
+// demo.ts
+interface Person {
+    name: string;
+    age: number;
+}
+
+class PersonManager {
+    hello: string;
+
+    constructor() {
+        this.hello = 'foo';
+    }
+}
+
+function sortPeople(input = Person[] = []) {
+    const result = input.slice(0);
+
+    result.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+    });
+
+    return result;
+}
+
+sortPeople(5); // Error: Argument of type '5' is not assignable to parameter of type 'any []'
+```
+
+TypeScript has a very neat built-in definition feature ("peek definition") for vanilla JS functions 
+so you don't have to look up the JS documentation in the browser.
+
+<img src="assets/images/TS-definitions-documentation.png" width="500">
+
+<img src="assets/images/TS-definition-example.png" width="500">
+
 <!-- Hyperlinks -->
 
 [TS Node Sumit Felix Slack]: https://www.youtube.com/watch?v=mgTenYbX2Kw
