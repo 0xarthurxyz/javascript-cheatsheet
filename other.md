@@ -537,3 +537,741 @@ so you don't have to look up the JS documentation in the browser.
 <!-- Hyperlinks -->
 
 [TS Node Sumit Felix Slack]: https://www.youtube.com/watch?v=mgTenYbX2Kw
+
+## Airbnb JavaScript Style Guide
+
+Source: [Github `airbnb/javascript`][airbnb javascript style guide]
+
+Below is a selection of stylistic rules to highlight.
+
+## References
+
+  <a name="references--prefer-const"></a><a name="2.1"></a>
+  - [2.1](#references--prefer-const) Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](https://eslint.org/docs/rules/prefer-const), [`no-const-assign`](https://eslint.org/docs/rules/no-const-assign)
+
+    > Why? This ensures that you can’t reassign your references, which can lead to bugs and difficult to comprehend code.
+
+    ```javascript
+    // bad
+    var a = 1;
+    var b = 2;
+
+    // good
+    const a = 1;
+    const b = 2;
+    ```
+
+  <a name="references--disallow-var"></a><a name="2.2"></a>
+  - [2.2](#references--disallow-var) If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](https://eslint.org/docs/rules/no-var)
+
+    > Why? `let` is block-scoped rather than function-scoped like `var`.
+
+    ```javascript
+    // bad
+    var count = 1;
+    if (true) {
+      count += 1;
+    }
+
+    // good, use the let.
+    let count = 1;
+    if (true) {
+      count += 1;
+    }
+    ```
+
+  <a name="references--block-scope"></a><a name="2.3"></a>
+  - [2.3](#references--block-scope) Note that both `let` and `const` are block-scoped, whereas `var` is function-scoped.
+
+    ```javascript
+    // const and let only exist in the blocks they are defined in.
+    {
+      let a = 1;
+      const b = 1;
+      var c = 1;
+    }
+    console.log(a); // ReferenceError
+    console.log(b); // ReferenceError
+    console.log(c); // Prints 1
+    ```
+
+    In the above code, you can see that referencing `a` and `b` will produce a ReferenceError, while `c` contains the number. This is because `a` and `b` are block scoped, while `c` is scoped to the containing function.
+
+### Objects
+
+  <a name="objects--no-new"></a><a name="3.1"></a>
+  - [3.1](#objects--no-new) Use the literal syntax for object creation. eslint: [`no-new-object`](https://eslint.org/docs/rules/no-new-object)
+
+    ```javascript
+    // bad
+    const item = new Object();
+
+    // good
+    const item = {};
+    ```
+
+    <a name="es6-computed-properties"></a><a name="3.4"></a>
+  - [3.2](#es6-computed-properties) Use computed property names when creating objects with dynamic property names.
+
+    > Why? They allow you to define all the properties of an object in one place.
+
+    ```javascript
+
+    function getKey(k) {
+      return `a key named ${k}`;
+    }
+
+    // bad
+    const obj = {
+      id: 5,
+      name: 'San Francisco',
+    };
+    obj[getKey('enabled')] = true;
+
+    // good
+    const obj = {
+      id: 5,
+      name: 'San Francisco',
+      [getKey('enabled')]: true,
+    };
+    ```
+
+    <a name="es6-object-concise"></a><a name="3.6"></a>
+  - [3.4](#es6-object-concise) Use property value shorthand. eslint: [`object-shorthand`](https://eslint.org/docs/rules/object-shorthand)
+
+    > Why? It is shorter and descriptive.
+
+    ```javascript
+    const lukeSkywalker = 'Luke Skywalker';
+
+    // bad
+    const obj = {
+      lukeSkywalker: lukeSkywalker,
+    };
+
+    // good
+    const obj = {
+      lukeSkywalker,
+    };
+    ```
+    <a name="objects--grouped-shorthand"></a><a name="3.7"></a>
+  - [3.5](#objects--grouped-shorthand) Group your shorthand properties at the beginning of your object declaration.
+
+    > Why? It’s easier to tell which properties are using the shorthand.
+
+    ```javascript
+    const anakinSkywalker = 'Anakin Skywalker';
+    const lukeSkywalker = 'Luke Skywalker';
+
+    // bad
+    const obj = {
+      episodeOne: 1,
+      twoJediWalkIntoACantina: 2,
+      lukeSkywalker,
+      episodeThree: 3,
+      mayTheFourth: 4,
+      anakinSkywalker,
+    };
+
+    // good
+    const obj = {
+      lukeSkywalker,
+      anakinSkywalker,
+      episodeOne: 1,
+      twoJediWalkIntoACantina: 2,
+      episodeThree: 3,
+      mayTheFourth: 4,
+    };
+    ```
+    <a name="objects--quoted-props"></a><a name="3.8"></a>
+  - [3.6](#objects--quoted-props) Only quote properties that are invalid identifiers. eslint: [`quote-props`](https://eslint.org/docs/rules/quote-props)
+
+    > Why? In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
+
+    ```javascript
+    // bad
+    const bad = {
+      'foo': 3,
+      'bar': 4,
+      'data-blah': 5,
+    };
+
+    // good
+    const good = {
+      foo: 3,
+      bar: 4,
+      'data-blah': 5,
+    };
+    ```
+
+### Arrays
+
+  <a name="arrays--literals"></a><a name="4.1"></a>
+  - [4.1](#arrays--literals) Use the literal syntax for array creation. eslint: [`no-array-constructor`](https://eslint.org/docs/rules/no-array-constructor)
+
+    ```javascript
+    // bad
+    const items = new Array();
+
+    // good
+    const items = [];
+    ```
+
+  <a name="arrays--push"></a><a name="4.2"></a>
+  - [4.2](#arrays--push) Use [Array#push](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push) instead of direct assignment to add items to an array.
+
+    ```javascript
+    const someStack = [];
+
+    // bad
+    someStack[someStack.length] = 'abracadabra';
+
+    // good
+    someStack.push('abracadabra');
+    ```
+
+  <a name="es6-array-spreads"></a><a name="4.3"></a>
+  - [4.3](#es6-array-spreads) Use array spreads `...` to copy arrays.
+
+    ```javascript
+    // bad
+    const len = items.length;
+    const itemsCopy = [];
+    let i;
+
+    for (i = 0; i < len; i += 1) {
+      itemsCopy[i] = items[i];
+    }
+
+    // good
+    const itemsCopy = [...items];
+    ```
+
+    <a name="arrays--callback-return"></a><a name="4.5"></a>
+  - [4.7](#arrays--callback-return) Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following [8.2](#arrows--implicit-return). eslint: [`array-callback-return`](https://eslint.org/docs/rules/array-callback-return)
+
+    ```javascript
+    // good
+    [1, 2, 3].map((x) => {
+      const y = x + 1;
+      return x * y;
+    });
+
+    // good
+    [1, 2, 3].map((x) => x + 1);
+
+    // bad - no returned value means `acc` becomes undefined after the first iteration
+    [[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
+      const flatten = acc.concat(item);
+    });
+
+    // good
+    [[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
+      const flatten = acc.concat(item);
+      return flatten;
+    });
+
+    // bad
+    inbox.filter((msg) => {
+      const { subject, author } = msg;
+      if (subject === 'Mockingbird') {
+        return author === 'Harper Lee';
+      } else {
+        return false;
+      }
+    });
+
+    // good
+    inbox.filter((msg) => {
+      const { subject, author } = msg;
+      if (subject === 'Mockingbird') {
+        return author === 'Harper Lee';
+      }
+
+      return false;
+    });
+    ```
+
+  <a name="arrays--bracket-newline"></a>
+  - [4.8](#arrays--bracket-newline) Use line breaks after opening array brackets and before closing array brackets, if an array has multiple lines
+
+    ```javascript
+    // bad
+    const arr = [
+      [0, 1], [2, 3], [4, 5],
+    ];
+
+    const objectInArray = [{
+      id: 1,
+    }, {
+      id: 2,
+    }];
+
+    const numberInArray = [
+      1, 2,
+    ];
+
+    // good
+    const arr = [[0, 1], [2, 3], [4, 5]];
+
+    const objectInArray = [
+      {
+        id: 1,
+      },
+      {
+        id: 2,
+      },
+    ];
+
+    const numberInArray = [
+      1,
+      2,
+    ];
+    ```
+
+### Strings
+
+  <a name="strings--quotes"></a><a name="6.1"></a>
+  - [6.1](#strings--quotes) Use single quotes `''` for strings. eslint: [`quotes`](https://eslint.org/docs/rules/quotes)
+
+    ```javascript
+    // bad
+    const name = "Capt. Janeway";
+
+    // bad - template literals should contain interpolation or newlines
+    const name = `Capt. Janeway`;
+
+    // good
+    const name = 'Capt. Janeway';
+    ```
+
+  <a name="es6-template-literals"></a><a name="6.4"></a>
+  - [6.3](#es6-template-literals) When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](https://eslint.org/docs/rules/prefer-template) [`template-curly-spacing`](https://eslint.org/docs/rules/template-curly-spacing)
+
+    > Why? Template strings give you a readable, concise syntax with proper newlines and string interpolation features.
+
+    ```javascript
+    // bad
+    function sayHi(name) {
+      return 'How are you, ' + name + '?';
+    }
+
+    // bad
+    function sayHi(name) {
+      return ['How are you, ', name, '?'].join();
+    }
+
+    // bad
+    function sayHi(name) {
+      return `How are you, ${ name }?`;
+    }
+
+    // good
+    function sayHi(name) {
+      return `How are you, ${name}?`;
+    }
+    ```
+
+### Functions
+
+  <a name="functions--declarations"></a><a name="7.1"></a>
+  - [7.1](#functions--declarations) Use named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.org/docs/rules/func-style), [`func-names`](https://eslint.org/docs/latest/rules/func-names)
+
+    > Why? Function declarations are hoisted, which means that it’s easy - too easy - to reference the function before it is defined in the file. This harms readability and maintainability. If you find that a function’s definition is large or complex enough that it is interfering with understanding the rest of the file, then perhaps it’s time to extract it to its own module! Don’t forget to explicitly name the expression, regardless of whether or not the name is inferred from the containing variable (which is often the case in modern browsers or when using compilers such as Babel). This eliminates any assumptions made about the Error’s call stack. ([Discussion](https://github.com/airbnb/javascript/issues/794))
+
+    ```javascript
+    // bad
+    function foo() {
+      // ...
+    }
+
+    // bad
+    const foo = function () {
+      // ...
+    };
+
+    // good
+    // lexical name distinguished from the variable-referenced invocation(s)
+    const short = function longUniqueMoreDescriptiveLexicalFoo() {
+      // ...
+    };
+    ```
+
+    <a name="es6-default-parameters"></a><a name="7.7"></a>
+  - [7.7](#es6-default-parameters) Use default parameter syntax rather than mutating function arguments.
+
+    ```javascript
+    // really bad
+    function handleThings(opts) {
+      // No! We shouldn’t mutate function arguments.
+      // Double bad: if opts is falsy it'll be set to an object which may
+      // be what you want but it can introduce subtle bugs.
+      opts = opts || {};
+      // ...
+    }
+
+    // still bad
+    function handleThings(opts) {
+      if (opts === void 0) {
+        opts = {};
+      }
+      // ...
+    }
+
+    // good
+    function handleThings(opts = {}) {
+      // ...
+    }
+    ```
+
+  <a name="functions--default-side-effects"></a><a name="7.8"></a>
+  - [7.8](#functions--default-side-effects) Avoid side effects with default parameters.
+
+    > Why? They are confusing to reason about.
+
+    ```javascript
+    let b = 1;
+    // bad
+    function count(a = b++) {
+      console.log(a);
+    }
+    count();  // 1
+    count();  // 2
+    count(3); // 3
+    count();  // 3
+    ```
+
+  <a name="functions--defaults-last"></a><a name="7.9"></a>
+  - [7.9](#functions--defaults-last) Always put default parameters last. eslint: [`default-param-last`](https://eslint.org/docs/rules/default-param-last)
+
+    ```javascript
+    // bad
+    function handleThings(opts = {}, name) {
+      // ...
+    }
+
+    // good
+    function handleThings(name, opts = {}) {
+      // ...
+    }
+    ```
+
+    <a name="functions--signature-spacing"></a><a name="7.11"></a>
+  - [7.11](#functions--signature-spacing) Spacing in a function signature. eslint: [`space-before-function-paren`](https://eslint.org/docs/rules/space-before-function-paren) [`space-before-blocks`](https://eslint.org/docs/rules/space-before-blocks)
+
+    > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+    ```javascript
+    // bad
+    const f = function(){};
+    const g = function (){};
+    const h = function() {};
+
+    // good
+    const x = function () {};
+    const y = function a() {};
+    ```
+
+    <a name="functions--mutate-params"></a><a name="7.12"></a>
+  - [7.12](#functions--mutate-params) Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/rules/no-param-reassign)
+
+    > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
+
+    ```javascript
+    // bad
+    function f1(obj) {
+      obj.key = 1;
+    }
+
+    // good
+    function f2(obj) {
+      const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
+    }
+    ```
+
+    <a name="functions--signature-invocation-indentation"></a>
+  - [7.15](#functions--signature-invocation-indentation) Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`function-paren-newline`](https://eslint.org/docs/rules/function-paren-newline)
+
+    ```javascript
+    // bad
+    function foo(bar,
+                 baz,
+                 quux) {
+      // ...
+    }
+
+    // good
+    function foo(
+      bar,
+      baz,
+      quux,
+    ) {
+      // ...
+    }
+
+    // bad
+    console.log(foo,
+      bar,
+      baz);
+
+    // good
+    console.log(
+      foo,
+      bar,
+      baz,
+    );
+    ```
+
+### Arrow Functions
+
+  <a name="arrows--use-them"></a><a name="8.1"></a>
+  - [8.1](#arrows--use-them) When you must use an anonymous function (as when passing an inline callback), use arrow function notation. eslint: [`prefer-arrow-callback`](https://eslint.org/docs/rules/prefer-arrow-callback), [`arrow-spacing`](https://eslint.org/docs/rules/arrow-spacing)
+
+    > Why? It creates a version of the function that executes in the context of `this`, which is usually what you want, and is a more concise syntax.
+
+    > Why not? If you have a fairly complicated function, you might move that logic out into its own named function expression.
+
+    ```javascript
+    // bad
+    [1, 2, 3].map(function (x) {
+      const y = x + 1;
+      return x * y;
+    });
+
+    // good
+    [1, 2, 3].map((x) => {
+      const y = x + 1;
+      return x * y;
+    });
+    ```
+
+    <a name="arrows--one-arg-parens"></a><a name="8.4"></a>
+  - [8.4](#arrows--one-arg-parens) Always include parentheses around arguments for clarity and consistency. eslint: [`arrow-parens`](https://eslint.org/docs/rules/arrow-parens)
+
+    > Why? Minimizes diff churn when adding or removing arguments.
+
+    ```javascript
+    // bad
+    [1, 2, 3].map(x => x * x);
+
+    // good
+    [1, 2, 3].map((x) => x * x);
+
+    // bad
+    [1, 2, 3].map(number => (
+      `A long string with the ${number}. It’s so long that we don’t want it to take up space on the .map line!`
+    ));
+
+    // good
+    [1, 2, 3].map((number) => (
+      `A long string with the ${number}. It’s so long that we don’t want it to take up space on the .map line!`
+    ));
+
+    // bad
+    [1, 2, 3].map(x => {
+      const y = x + 1;
+      return x * y;
+    });
+
+    // good
+    [1, 2, 3].map((x) => {
+      const y = x + 1;
+      return x * y;
+    });
+    ```
+
+### Classes & Constructors
+
+  <a name="constructors--use-class"></a><a name="9.1"></a>
+  - [9.1](#constructors--use-class) Always use `class`. Avoid manipulating `prototype` directly.
+
+    > Why? `class` syntax is more concise and easier to reason about.
+
+    ```javascript
+    // bad
+    function Queue(contents = []) {
+      this.queue = [...contents];
+    }
+    Queue.prototype.pop = function () {
+      const value = this.queue[0];
+      this.queue.splice(0, 1);
+      return value;
+    };
+
+    // good
+    class Queue {
+      constructor(contents = []) {
+        this.queue = [...contents];
+      }
+      pop() {
+        const value = this.queue[0];
+        this.queue.splice(0, 1);
+        return value;
+      }
+    }
+    ```
+
+  <a name="constructors--extends"></a><a name="9.2"></a>
+  - [9.2](#constructors--extends) Use `extends` for inheritance.
+
+    > Why? It is a built-in way to inherit prototype functionality without breaking `instanceof`.
+
+    ```javascript
+    // bad
+    const inherits = require('inherits');
+    function PeekableQueue(contents) {
+      Queue.apply(this, contents);
+    }
+    inherits(PeekableQueue, Queue);
+    PeekableQueue.prototype.peek = function () {
+      return this.queue[0];
+    };
+
+    // good
+    class PeekableQueue extends Queue {
+      peek() {
+        return this.queue[0];
+      }
+    }
+    ```
+
+    <a name="constructors--no-useless"></a><a name="9.5"></a>
+  - [9.5](#constructors--no-useless) Classes have a default constructor if one is not specified. An empty constructor function or one that just delegates to a parent class is unnecessary. eslint: [`no-useless-constructor`](https://eslint.org/docs/rules/no-useless-constructor)
+
+    ```javascript
+    // bad
+    class Jedi {
+      constructor() {}
+
+      getName() {
+        return this.name;
+      }
+    }
+
+    // bad
+    class Rey extends Jedi {
+      constructor(...args) {
+        super(...args);
+      }
+    }
+
+    // good
+    class Rey extends Jedi {
+      constructor(...args) {
+        super(...args);
+        this.name = 'Rey';
+      }
+    }
+    ```
+
+    <a name="classes--methods-use-this"></a>
+  - [9.7](#classes--methods-use-this) Class methods should use `this` or be made into a static method unless an external library or framework requires using specific non-static methods. Being an instance method should indicate that it behaves differently based on properties of the receiver. eslint: [`class-methods-use-this`](https://eslint.org/docs/rules/class-methods-use-this)
+
+    ```javascript
+    // bad
+    class Foo {
+      bar() {
+        console.log('bar');
+      }
+    }
+
+    // good - this is used
+    class Foo {
+      bar() {
+        console.log(this.bar);
+      }
+    }
+
+    // good - constructor is exempt
+    class Foo {
+      constructor() {
+        // ...
+      }
+    }
+
+    // good - static methods aren't expected to use this
+    class Foo {
+      static bar() {
+        console.log('bar');
+      }
+    }
+    ```
+
+## Modules
+
+  <a name="modules--use-them"></a><a name="10.1"></a>
+  - [10.1](#modules--use-them) Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
+
+    > Why? Modules are the future, let’s start using the future now.
+
+    ```javascript
+    // bad
+    const AirbnbStyleGuide = require('./AirbnbStyleGuide');
+    module.exports = AirbnbStyleGuide.es6;
+
+    // ok
+    import AirbnbStyleGuide from './AirbnbStyleGuide';
+    export default AirbnbStyleGuide.es6;
+
+    // best
+    import { es6 } from './AirbnbStyleGuide';
+    export default es6;
+    ```
+
+  <a name="modules--no-wildcard"></a><a name="10.2"></a>
+  - [10.2](#modules--no-wildcard) Do not use wildcard imports.
+
+    > Why? This makes sure you have a single default export.
+
+    ```javascript
+    // bad
+    import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+
+    // good
+    import AirbnbStyleGuide from './AirbnbStyleGuide';
+    ```
+
+  <a name="modules--no-export-from-import"></a><a name="10.3"></a>
+  - [10.3](#modules--no-export-from-import) And do not export directly from an import.
+
+    > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+
+    ```javascript
+    // bad
+    // filename es6.js
+    export { es6 as default } from './AirbnbStyleGuide';
+
+    // good
+    // filename es6.js
+    import { es6 } from './AirbnbStyleGuide';
+    export default es6;
+    ```
+
+  <a name="modules--no-duplicate-imports"></a>
+  - [10.4](#modules--no-duplicate-imports) Only import from a path in one place.
+ eslint: [`no-duplicate-imports`](https://eslint.org/docs/rules/no-duplicate-imports)
+    > Why? Having multiple lines that import from the same path can make code harder to maintain.
+
+    ```javascript
+    // bad
+    import foo from 'foo';
+    // … some other imports … //
+    import { named1, named2 } from 'foo';
+
+    // good
+    import foo, { named1, named2 } from 'foo';
+
+    // good
+    import foo, {
+      named1,
+      named2,
+    } from 'foo';
+    ```
+
+Testing: [30.2](https://github.com/airbnb/javascript#testing--for-real)
+
+Whenever you fix a bug, write a regression test. A bug fixed without a regression test is almost certainly going to break again in the future.
+
+<!-- Hyperlinks -->
+
+[airbnb javascript style guide]: https://github.com/airbnb/javascript
