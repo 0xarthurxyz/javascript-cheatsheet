@@ -833,10 +833,10 @@ console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 
 Things to learn:
 
-+   State changing methods
-+   Listening to events
-+   Query historic events
-+   Signing Messages
++ [ ]   State changing methods
++ [ ]   Listening to events
++ [ ]   Query historic events
++ [ ]   Signing Messages
 
 <!-- Hyperlinks -->
 
