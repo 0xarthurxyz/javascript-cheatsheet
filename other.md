@@ -544,7 +544,7 @@ Source: [Github `airbnb/javascript`][airbnb javascript style guide]
 
 Below is a selection of stylistic rules to highlight.
 
-## References
+### References
 
   <a name="references--prefer-const"></a><a name="2.1"></a>
   - [2.1](#references--prefer-const) Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](https://eslint.org/docs/rules/prefer-const), [`no-const-assign`](https://eslint.org/docs/rules/no-const-assign)
@@ -1197,7 +1197,7 @@ Below is a selection of stylistic rules to highlight.
     }
     ```
 
-## Modules
+### Modules
 
   <a name="modules--use-them"></a><a name="10.1"></a>
   - [10.1](#modules--use-them) Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
@@ -1583,3 +1583,5 @@ Whenever you fix a bug, write a regression test. A bug fixed without a regressio
 <!-- Hyperlinks -->
 
 [airbnb javascript style guide]: https://github.com/airbnb/javascript
+
+## 
