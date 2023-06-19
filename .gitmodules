@@ -1,3 +1,0 @@
-[submodule "airbnb"]
-	path = airbnb
-	url = git@github.com:airbnb/javascript.git
