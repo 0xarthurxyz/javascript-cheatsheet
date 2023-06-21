@@ -1578,10 +1578,150 @@ Below is a selection of stylistic rules to highlight.
 
 Testing: [30.2](https://github.com/airbnb/javascript#testing--for-real)
 
-Whenever you fix a bug, write a regression test. A bug fixed without a regression test is almost certainly going to break again in the future.
+Whenever you fix a bug, write a regression test. A bug fixed without a regression test is almost 
+certainly going to break again in the future.
 
 <!-- Hyperlinks -->
 
 [airbnb javascript style guide]: https://github.com/airbnb/javascript
 
-## 
+## TypeScript for Java/C# Programmers
+
+Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html)
+
+TLDR:
+
++	In Java, everything belongs to a class or interface.
++	"Free" functions (those not associated with a class) working over data without an implied OOP 
+	hierarchy are the preferred model for writing programs in JavaScript.
++	TypeScript supports JavaScript classes, including many common patterns such as 
+	implementing  interfaces, inheritance, and static methods.
++	Java is a *reified, nominal* type system, because types written in code are present at 
+	runtime, and the types are related via their declarations, not their structures.
++	In java, it's meaningful to think of a one-to-one correspondence between runtime types and 
+	their compile-time declarations.
++	In TS, types are sets so a particular value can belong to *many* sets (or types) at the same 
+	time.
+
+> We recommend learning a little bit of JavaScript without types first to understand JavaScript’s 
+> runtime behaviors. [...] TypeScript uses the same runtime as JavaScript, so any resources about 
+> how to accomplish specific runtime behavior (converting a string to a number, 
+> displaying an alert, writing a file to disk, etc.) will always apply equally well to 
+> TypeScript programs.
+
+### Rethinking the Class
+
+> C# and Java are what we might call *mandatory OOP* languages. In these languages, the *class* is 
+> the basic unit of code organization, and also the basic container of all data *and* behavior at 
+> runtime. Forcing all functionality and data to be held in classes can be a good domain model for 
+> some problems, but not every domain *needs* to be represented this way.
+
+#### Free Functions and Data
+
+> In JavaScript, functions can live anywhere, and data can be passed around freely without being 
+> inside a pre-defined `class` or `struct`. This flexibility is extremely powerful. 
+> "Free" functions (those not associated with a class) working over data without an implied OOP 
+> hierarchy tends to be the preferred model for writing programs in JavaScript.
+
+#### Static Classes
+
+> Additionally, certain constructs from C# and Java such as singletons and static classes are 
+> unnecessary in TypeScript.
+
+### OOP in TypeScript
+
+> That said, you can still use classes if you like! Some problems are well-suited to being solved 
+> by a traditional OOP hierarchy, and TypeScript's support for JavaScript classes will make these 
+> models even more powerful. TypeScript supports many common patterns such as implementing 
+> interfaces, inheritance, and static methods.
+> 
+> We'll cover classes later in this guide.
+
+### Rethinking Types
+
+> TypeScript's understanding of a *type* is actually quite different from C# or Java's. 
+> Let's explore some differences.
+
+#### Nominal Reified Type Systems
+
+> In C# or Java, any given value or object has one exact type - either `null`, a primitive, or a 
+> known class type. We can call methods like `value.GetType()` or `value.getClass()` to query the 
+> exact type at runtime. The definition of this type will reside in a class somewhere with some 
+> name, and we can't use two classes with similar shapes in lieu of each other unless there's an 
+> explicit inheritance relationship or commonly-implemented interface.
+> 
+> These aspects describe a *reified, nominal* type system. The types we wrote in the code are 
+> present at runtime, and the types are related via their declarations, not their structures.
+
+#### Types as Sets
+
+> In C# or Java, it's meaningful to think of a one-to-one correspondence between runtime types and 
+> their compile-time declarations.
+>
+> In TypeScript, it's better to think of a type as a *set of values* that share something in 
+> common. Because types are just sets, a particular value can belong to *many* sets at the same 
+> time.
+> 
+> Once you start thinking of types as sets, certain operations become very natural. For example, in
+> C#, it's awkward to pass around a value that is *either* a `string` or `int`, because there isn't
+> a single type that represents this sort of value.
+>
+> In TypeScript, this becomes very natural once you realize that every type is just a set. How do
+> you describe a value that either belongs in the `string` set or the `number` set? It simply 
+> belongs to the *union* of those sets: `string | number`.
+>
+> TypeScript provides a number of mechanisms to work with types in a set-theoretic way, and you'll 
+> find them more intuitive if you think of types as sets.
+
+#### Erased Structural Types
+
+> In TypeScript, objects are *not* of a single exact type. For example, if we construct an object 
+> that satisfies an interface, we can use that object where that interface is expected even though 
+> there was no declarative relationship between the two.
+
+```js
+// Example
+interface Pointlike {
+  x: number;
+  y: number;
+}
+interface Named {
+  name: string;
+}
+ 
+function logPoint(point: Pointlike) {
+  console.log("x = " + point.x + ", y = " + point.y);
+}
+ 
+function logName(x: Named) {
+  console.log("Hello, " + x.name);
+}
+ 
+const obj = {
+  x: 0,
+  y: 0,
+  name: "Origin",
+};
+ 
+logPoint(obj);
+logName(obj);
+```
+
+Surpises with TS: Empty types
+
+> We can see that { k: 10 } has all of the properties that Empty does, because Empty has no properties. Therefore, this is a valid call
+
+```js
+class Empty {}
+ 
+function fn(arg: Empty) {
+  // do something?
+}
+ 
+// No error, but this isn't an 'Empty' ?
+fn({ k: 10 });
+```
+
+### TypeScript Handbook
+
+- [ ] Read [about page](https://www.typescriptlang.org/docs/handbook/intro.html) on handbook (3min)
