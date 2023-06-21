@@ -491,7 +491,7 @@ Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/typesc
 
 For example:
 
-```js
+```ts
 // Example
 interface Pointlike {
 	x: number;
