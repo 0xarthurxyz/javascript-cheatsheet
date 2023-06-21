@@ -1591,17 +1591,38 @@ Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/typesc
 
 TLDR:
 
-+	In Java, everything belongs to a class or interface.
-+	"Free" functions (those not associated with a class) working over data without an implied OOP 
-	hierarchy are the preferred model for writing programs in JavaScript.
-+	TypeScript supports JavaScript classes, including many common patterns such as 
-	implementing  interfaces, inheritance, and static methods.
-+	Java is a *reified, nominal* type system, because types written in code are present at 
-	runtime, and the types are related via their declarations, not their structures.
-+	In java, it's meaningful to think of a one-to-one correspondence between runtime types and 
-	their compile-time declarations.
-+	In TS, types are sets so a particular value can belong to *many* sets (or types) at the same 
-	time.
++	In Java:
+
+	+	everything belongs to a class or interface
+
+	+	it's meaningful to think of a one-to-one correspondence between runtime types and 
+		their compile-time declarations
+
+	+	types are related to their declarations, not their structures.
+
+	+	the type system is (reified) _nominal_.
+
+		> A [type system](https://en.wikipedia.org/wiki/Type_system) is **nominal,** 
+		> **nominative,** or **name-based** if compatibility and equivalence of 
+		> [data types](https://en.wikipedia.org/wiki/Data_type) is determined by explicit 
+		> declarations and/or the name of the types. Nominal systems are used to determine if types 
+		> are equivalent, as well as if a type is a subtype of another. 
+		> 
+		> Nominal type systems contrast with 
+		> [structural systems](https://en.wikipedia.org/wiki/Structural_type_system), where 
+		> comparisons  are based on the structure of the types in question and do not require
+		> explicit declarations.
+
+		Source: [wikipedia.org](https://en.wikipedia.org/wiki/Nominal_type_system)
+
++	In TypeScript:
+
+	+	_free functions_ (those not associated with a class) working over data without an implied 
+		OOP hierarchy are the preferred model for writing programs (in JavaScript more broadly)
+	+	types are _sets_ (a particular value can belong to *many* sets or types at the same 
+		time)
+	+	classes and many common patterns such as  interfaces, inheritance, and static methods
+		are supported
 
 > We recommend learning a little bit of JavaScript without types first to understand JavaScript’s 
 > runtime behaviors. [...] TypeScript uses the same runtime as JavaScript, so any resources about 
@@ -1707,7 +1728,7 @@ logPoint(obj);
 logName(obj);
 ```
 
-Surpises with TS: Empty types
+#### Surpises with TS: Empty types
 
 > We can see that { k: 10 } has all of the properties that Empty does, because Empty has no properties. Therefore, this is a valid call
 
