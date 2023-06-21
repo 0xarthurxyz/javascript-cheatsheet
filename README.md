@@ -1,291 +1,95 @@
 # JavaScript (Cheat Sheet)
 
-Context: These are noob notes on JavaScript/TypeScript (mostly notes-to-self). They are incomplete by default.
+This is a cheatsheet on JavaScript/TypeScript (mostly notes-to-self). They are incomplete by default.
 
-- [JavaScript References by Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript#reference)
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
-- [RealPython: Python vs JavaScript for Pythonistas](https://realpython.com/python-vs-javascript/)
+## Basics
 
-## Standard built-in objects
+### References (variables)
 
-### Data types
+Source: [Airbnb style guide](/airbnb.md#references).
 
-Data types:
+Use `const` for all of your references; avoid using `var`.
 
-- undefined
-- null
-- boolean
-- string `"a"` `\"a\"` `'"a"'` `'a'`
-- symbol
-- number
-- object
-
-### Assignment operators
-
-- `var`: any data type over time (global scope)
-- `let`: value can change - mutable (local scope)
-- `const`: value cannot change - immutable
-
-### Print
+> Why? This ensures that you can’t reassign your references, which can lead to bugs and difficult 
+> to comprehend code.
 
 ```js
-var a = 7;
-console.log(a)
->>> 7
+// bad
+var a = 1;
+var b = 2;
+
+// good
+const a = 1;
+const b = 2;
 ```
 
-### Arrays
+If you must reassign references, use `let` instead of `var`.
+
+> Why? `let` is block-scoped rather than function-scoped like `var`.
 
 ```js
-var arr = ["a", 1];
-var nestedArr = [["a", 1], ["b", 2]]
-```
-
-Adds to end of array (`arr.push(<elements>)`):
-
-```js
-var arr = [1, 2, 3]
-arr.push(4)
-// arr = [1, 2, 3, 4]
-arr.push([5, 6])
-// arr = [1, 2, 3, 4, [5, 6]]
-```
-
-Adds to start of array (`arr.unshift(<elements>)`):
-
-```js
-var arr = [1, 2, 3]
-arr.unshift(0)
-// arr = [0, 1, 2, 3]
-arr.unshift([-2, -1])
-// arr = [[-2, -1], 0, 1, 2, 3]
-```
-
-Removes from end of array (`arr.pop()`):
-
-```js
-var arr = [1, 2, 3]
-var lastElement = arr.pop()
-// arr = [1, 2] and lastElement = 3
-```
-
-Removes from start of array (`arr.shift()`):
-
-```js
-var arr = [1, 2, 3]
-var firstElement = arr.shift()
-// arr = [2, 3] and firstElement = 1
-```
-
-### Functions
-
-```js
-function someReusableFunction(){
-  console.log("hello world");
+// bad
+var count = 1;
+if (true) {
+	count += 1;
 }
 
-someReusableFunction()
-
-function anotherReusableFunction(){
-  console.log("foo bar");
-
-anotherReusableFunction()
-
-// hello world
-// foo bar
-```
-
-Functions with arguments:
-
-```js
-function someFunctionWithArgs(a, b){
-  console.log(a - b);
+// good, use the let.
+let count = 1;
+if (true) {
+	count += 1;
 }
-
-someFunctionWithArgs(10, 3);
-// 7
 ```
 
-Function with return:
+Both `let` and `const` are _block-scoped_, whereas `var` is _function-scoped_.
 
 ```js
-function subtract(a, b){
-  return a - b;
-}
-
-var result = subtract(10, 3);
-// result = 7
-```
-
-Variable Scope:
-
-- a `var` declared outside function body has **global** scope
-- a `var` declared in a function is scoped to the function, but (!) if it is declarated without keyword `var` in a function body it has global scope
-
-Equality (`==`) vs strict equality (`===`):
-
-- `==` attempts to covert both variables to a common data type (also for inequality `!=`)
-- `===` does not perform type conversion (also for strict inequality `!==`)
-
-```js
-console.log(7 == '7')
-// true
-
-console.log(7 === '7')
-// false
-
-console.log(7 !== '7')
-// true
-
-console.log(7 != '7')
-// false
-```
-
-### JavaScript Objects
-
-- (in JS) objects are like arrays but instead of using indices you are using properties (like a key-value store or dictionnary in Python)
-- you can assigning object properties with dot notation
-- you can access object properties with bracket notation (good when `key` is a string with space, e.g. "location country")
-
-```js
-// 1. create object
-var myFriend = {
-  "name": "Joe",
-  "location": "Venezuela",
-  "age": 25,
-  "friend": ["everyone!"]
-};
-
-// 2. access properties
-var myFriendsName = myFriend.name;
-// Joe
-var myFriendsLocation = myFriend["location"];
-// Venezuela
-
-// 3. update properties
-myFriend.age = 31;
-/*
+// const and let only exist in the blocks they are defined in.
 {
-  name: 'Joe',
-  location: 'Venezuela',
-  age: 31,
-  friend: [ 'everyone!' ]
+	let a = 1;
+	const b = 1;
+	var c = 1;
 }
-*/
-
-// 4. add new properties
-myFriend["profession"] = "happy coder";
-/* 
-{
-  name: 'Joe',
-  location: 'Venezuela',
-  age: 31,
-  friend: [ 'everyone!' ],
-  profession: 'happy coder'
-}
-*/
-
-// 5. delete a property
-delete myFriend.location
-/* 
-{
-  name: 'Joe',
-  age: 31,
-  friend: [ 'everyone!' ],
-  profession: 'happy coder'
-}
-*/
-
-// 6. testing for property
-myFriend.hasOwnProperty('name');
-// true
+console.log(a); // ReferenceError
+console.log(b); // ReferenceError
+console.log(c); // Prints 1
 ```
 
-### Convert Unix timestamp to time using `Date()`
+You can see that referencing `a` and `b` will produce a ReferenceError, while `c` contains the 
+number. This is because `a` and `b` are block scoped, while `c` is scoped to the containing 
+function.
 
-> Simply multiply Unix timestamp by 1000 to convert it to a JavaScript time, because Unix timestamp measures time as a number of seconds, whereas in JavaScript time is fundamentally specified as the number of milliseconds (elapsed since January 1, 1970 at 00:00:00 UTC).
+### Objects
 
-```js
-// Timestamp in seconds
-var unixTimestamp = 1651822834;
++	JavaScript objects
 
-/* Create a new JavaScript Date object based on Unix timestamp.
-Multiplied it by 1000 to convert it into milliseconds */
-var date = new Date(unixTimestamp * 1000);
+	+	are key-value pairs that can contain strings, numbers, arrays, functions, booleans, and 
+		other objects
 
-// Generate date string
-console.log(date.toLocaleDateString("en-US"));   // Prints: 5/6/2022
-console.log(date.toLocaleDateString("en-GB"));   // Prints: 06/05/2022
-console.log(date.toLocaleDateString("default")); // Prints: 5/6/2022
+	```js
+	// JavaScript Object
+	const jsObj = {
+		name: 'Alice',
+		age: 30,
+	};
+	```
 
-// Generate time string
-console.log(date.toLocaleTimeString("en-US"));   // Prints: 1:10:34 PM
-console.log(date.toLocaleTimeString("it-IT"));   // Prints: 13:10:34
-console.log(date.toLocaleTimeString("default")); // Prints: 1:10:34 PM
-```
++	JSON objects
 
-Source: [Tutorial Republic > How to Convert a Unix Timestamp to Time in JavaScript](https://www.tutorialrepublic.com/faq/how-to-convert-a-unix-timestamp-to-time-in-javascript.php)
+	+	are text-only (that means both keys and values are `strings`)
 
+		```js
+		// JSON Object
+		const jsonObj = {
+			"name": "Alice",
+			"age": "30",
+		};
+		```
+	+	you can validate JSON objects using [jsonlint.com](https://jsonlint.com/)
 
-Syntax: 
-```js
-toLocaleDateString()
-toLocaleDateString(locales)
-toLocaleDateString(locales, options) // prints: "Thursday, December 20, 2012, UTC"
-```
+More info: [other notes](other.md#json-object-v-javascript-object).
 
-`locale`: 
-
-```js
-// US English uses month-day-year order
-console.log(date.toLocaleDateString("en-US"));
-// "12/20/2012"
-
-// British English uses day-month-year order
-console.log(date.toLocaleDateString("en-GB"));
-// "20/12/2012"
-
-// Korean uses year-month-day order
-console.log(date.toLocaleDateString("ko-KR"));
-// "2012. 12. 20."
-```
-
-`options`: 
-
-```js
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-```
-
-Example: 
-
-```js
-const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-
-// request a weekday along with a long date
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-console.log(date.toLocaleDateString("de-DE", options));
-// "Donnerstag, 20. Dezember 2012"
-
-// an application may want to use UTC and make that visible
-options.timeZone = "UTC";
-options.timeZoneName = "short";
-console.log(date.toLocaleDateString("en-US", options));
-// "Thursday, December 20, 2012, UTC"
-```
-
-Source: [MDN Web Docs > `Date.prototype.toLocaleDateString()` ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#using_options)
-
-## NPM and yarn (package managers)
+## Package managers (npm)
 
 Source: [dev.to - The Difference Between NPM and Yarn][yarn npm difference]
 
@@ -317,7 +121,7 @@ Install a package globally:
 NPM - `npm install package -g`
 Yarn - `yarn global add package`
 
-## Node.js
+## Runtime environment (Node.js)
 
 ### How to start a simple Node project
 
@@ -519,7 +323,7 @@ logPoint(obj);
 logName(obj);
 ```
 
-More details in [other notes](other.md#typescript-for-javac-programmers).
+More info: [other notes](other.md#typescript-for-javac-programmers).
 
 ## React.js
 

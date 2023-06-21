@@ -1827,3 +1827,91 @@ options.timeZoneName = "short";
 console.log(date.toLocaleDateString("en-US", options));
 // "Thursday, December 20, 2012, UTC"
 ```
+
+## JSON Object v. JavaScript Object
+
+Source: [medium.com](https://medium.com/geekculture/json-object-v-javascript-object-f00ae788cc1f)
+
+TLDR:
+
++	JavaScript objects
+
+	+	are key-value pairs that can contain strings, numbers, arrays, functions, booleans, and 
+		other objects
+
+	```js
+	// JavaScript Object
+	const jsObj = {
+		name: 'Alice',
+		age: 30,
+	};
+	```
+
++	JSON objects
+
+	+	are text-only (that means both keys and values are `strings`)
+
+		```js
+		// JSON Object
+		const jsonObj = {
+			"name": "Alice",
+			"age": "30",
+		};
+		```
+	+	you can validate JSON objects using [jsonlint.com](https://jsonlint.com/)
+
+
+What is JSON?
+
+> **J**ava**S**cript **O**bject **N**otation. JSON syntax is derived from Javascript objects, but 
+> the JSON format is *text only*, meaning a JSON object is quite literally just a string.
+
+When do we use a JSON object?
+
+> JSON is used to read data from a web server and then display that data onto a webpage. When we 
+> exchange data between a browser and a server it can only be text, hence we can use JSON for this.
+
+> We want to read a JSON object (essentially our string of data) and convert it into a JavaScript 
+> Object. 
+
+Methods to convert JSON:
+
++	Receiving Data
+
+	> The best way to do this is to use this built-in JavaScript function `JSON.parse()`.
+	> `JSON.parse()` will convert text into a JavaScript object.
+
++	Sending Data
+
+	> `JSON.stringify()` will convert a JavaScript object into a JSON object that can then be sent 
+	> to a web server.
+
+What is a JavaScript Object?
+
+> A Javascript object has a similar syntax to JSON, it uses curly braces and key/value pairs.
+> The main difference in syntax is that in a JSON object the keys must be a string written with 
+> double quotes.
+> In JavaScript, a key can be `strings`, `numbers`, or identifier names, and the strings can be 
+> written in single or double quotes.
+
+```js
+// JavaScript Object
+const jsObj = {
+	name: 'Alice',
+  	age: 30,
+};
+
+// JSON Object
+const jsonObj = {
+	"name": "Alice",
+  	"age": "30",
+};
+```
+
+You validate JSON objects using [jsonlint.com](https://jsonlint.com/).
+
+## The JavaScript language > Objects: the basics
+
+Source: [javascript.info](https://javascript.info/object)
+
++	[ ] Read more details about JavaScript objects.
