@@ -1743,6 +1743,87 @@ function fn(arg: Empty) {
 fn({ k: 10 });
 ```
 
-### TypeScript Handbook
+## How to Convert a Unix Timestamp to Time in JavaScript
 
-- [ ] Read [about page](https://www.typescriptlang.org/docs/handbook/intro.html) on handbook (3min)
+Source: [tutorialrepublic.com](https://www.tutorialrepublic.com/faq/how-to-convert-a-unix-timestamp-to-time-in-javascript.php)
+
+> Simply multiply Unix timestamp by 1000 to convert it to a JavaScript time, because Unix timestamp measures time as a number of seconds, whereas in JavaScript time is fundamentally specified as the number of milliseconds (elapsed since January 1, 1970 at 00:00:00 UTC).
+
+```js
+// Timestamp in seconds
+var unixTimestamp = 1651822834;
+
+/* Create a new JavaScript Date object based on Unix timestamp.
+Multiplied it by 1000 to convert it into milliseconds */
+var date = new Date(unixTimestamp * 1000);
+
+// Generate date string
+console.log(date.toLocaleDateString("en-US"));   // Prints: 5/6/2022
+console.log(date.toLocaleDateString("en-GB"));   // Prints: 06/05/2022
+console.log(date.toLocaleDateString("default")); // Prints: 5/6/2022
+
+// Generate time string
+console.log(date.toLocaleTimeString("en-US"));   // Prints: 1:10:34 PM
+console.log(date.toLocaleTimeString("it-IT"));   // Prints: 13:10:34
+console.log(date.toLocaleTimeString("default")); // Prints: 1:10:34 PM
+```
+
+## Mozilla - `Date.prototype.toLocaleDateString()`
+
+Source: [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#using_options)
+
+Syntax: 
+```js
+toLocaleDateString()
+toLocaleDateString(locales)
+toLocaleDateString(locales, options) // prints: "Thursday, December 20, 2012, UTC"
+```
+
+`locale`: 
+
+```js
+// US English uses month-day-year order
+console.log(date.toLocaleDateString("en-US"));
+// "12/20/2012"
+
+// British English uses day-month-year order
+console.log(date.toLocaleDateString("en-GB"));
+// "20/12/2012"
+
+// Korean uses year-month-day order
+console.log(date.toLocaleDateString("ko-KR"));
+// "2012. 12. 20."
+```
+
+`options`: 
+
+```js
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+```
+
+Example: 
+
+```js
+const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+// request a weekday along with a long date
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+console.log(date.toLocaleDateString("de-DE", options));
+// "Donnerstag, 20. Dezember 2012"
+
+// an application may want to use UTC and make that visible
+options.timeZone = "UTC";
+options.timeZoneName = "short";
+console.log(date.toLocaleDateString("en-US", options));
+// "Thursday, December 20, 2012, UTC"
+```
