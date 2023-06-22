@@ -361,6 +361,21 @@ Source: [logrocket](https://blog.logrocket.com/how-switch-node-js-versions-nvm/)
 
 ## TypeScript
 
+### Initialize a TypeScript project
+
+```bash
+npm init -y # shortcut for npm init --yes
+npm install typescript --save-dev # install typescript
+```
+
+Manually create `tsconfig.json` file if necessary:
+
+```bash
+tsc --init
+```
+
+Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
+
 ### Microsoft Cheat Sheets
 
 Source: [typescriptlang.org](https://www.typescriptlang.org/cheatsheets)
