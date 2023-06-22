@@ -153,7 +153,7 @@ const obj = {
 };
 ```
 
-Only quote properties that are invalid identifiers. eslint: [`quote-props`](https://eslint.org/docs/rules/quote-props)
+Only quote properties that are invalid identifiers.
 
 > Why? In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
 
