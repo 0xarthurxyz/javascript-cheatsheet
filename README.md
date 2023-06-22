@@ -364,14 +364,12 @@ Source: [logrocket](https://blog.logrocket.com/how-switch-node-js-versions-nvm/)
 ### Initialize a TypeScript project
 
 ```bash
-npm init -y # shortcut for npm init --yes
-npm install typescript --save-dev # install typescript
+npm init -y # quickly initializes nodejs project with package.json file
 ```
 
-Manually create `tsconfig.json` file if necessary:
-
 ```bash
-tsc --init
+npm install typescript --save-dev # installs typescript
+tsc --init # initializes TS project with tsconfig.json file
 ```
 
 Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
