@@ -177,35 +177,100 @@ Source: [Airbnb style guide](/airbnb.md#objects).
 
 ## Package managers (npm)
 
-Source: [dev.to - The Difference Between NPM and Yarn][yarn npm difference]
+Source: [devhints.io](https://devhints.io/npm)
 
-To see list of commands:
-NPM - `npm`
-Yarn - `yarn`
+### Package management
 
-Install dependencies from package.json:
-NPM - `npm install`
-Yarn - `yarn`
+| Command                           | Description                                               |
+| ---                               | ---                                                       |
+| `npm i`                           | Alias for `npm install`                                   |
+| `npm install`                     | Install everything in package.json                        |
+| `npm install --production`        | Install everything in package.json, except devDependecies |
+| ---                               | ---                                                       |  
+| `npm install lodash`              | Install a package                                         |
+| `npm install --save-dev lodash`   | Install as devDependency                                  |
+| `npm install --save-exact lodash` | Install with exact                                        |
+| ---                               | ---                                                       |
+| `npm version 1.2.3`               | Bump the package version to 1.2.3                         |
+| `npm version major`               | Bump the major package version by 1 (1.2.3 → 2.0.0)       |
+| `npm version minor`               | Bump the minor package version by 1 (1.2.3 → 1.3.0)       |
+| `npm version patch`               | Bump the patch package version by 1 (1.2.3 → 1.2.4)       |
 
-Install a package and add to package.json:
-NPM - `npm install package --save`
-Yarn - `yarn add package`
 
-Install a devDependency:
-NPM - `npm install package --save-dev`
-Yarn - `yarn add package --dev`
+`--save` is the default as of npm@5. Previously, using `npm install` without `--save` doesn't update package.json.
 
-Remove a dependency:
-NPM - `npm uninstall package --save`
-Yarn - `yarn remove package`
+### Install names
 
-Upgrade a package to its latest version:
-NPM - `npm update --save`
-Yarn - `yarn upgrade`
+| Command                              | Description             |
+| ---                                  | ---                     |
+| `npm i sax`                          | NPM package             |
+| `npm i sax@latest`                   | Specify tag `latest`    |
+| `npm i sax@3.0.0`                    | Specify version `3.0.0` |
+| `npm i sax@">=1 <2.0"`               | Specify version range   |
+| ---                                  | ---                     |
+| `npm i @org/sax`                     | Scoped NPM package      |
+| ---                                  | ---                     |
+| `npm i user/repo`                    | GitHub                  |
+| `npm i user/repo#master`             | GitHub                  |
+| `npm i github:user/repo`             | GitHub                  |
+| `npm i gitlab:user/repo`             | GitLab                  |
+| ---                                  | ---                     |
+| `npm i /path/to/repo`                | Absolute path           |
+| `npm i ./archive.tgz`                | Tarball                 |
+| `npm i https://site.com/archive.tgz` | Tarball via HTTP        |
 
-Install a package globally:
-NPM - `npm install package -g`
-Yarn - `yarn global add package`
+### Listing
+
+| Command                 | Description                                                         |
+| ---                     | ---                                                                 |
+| `npm list`              | Lists the installed versions of all dependencies in this software   | 
+| `npm list -g --depth 0` | Lists the installed versions of all globally installed packages     | 
+| `npm view`              | Lists the latest versions of all dependencies in this software      | 
+| `npm outdated`          | Lists only the dependencies in this software which are outdated     |
+
+### Updating
+
+| Command             | Description                |
+| ---                 | ---                        |
+| `npm update`        | Update production packages |
+| `npm update --dev`  | Update dev packages        |
+| `npm update -g`     | Update global packages     |
+| ---                 | ---                        |
+| `npm update lodash` | Update a package           |
+
+
+### Removing
+
+| Command             | Description                        |
+| ---                 | ---                                |
+| `npm rm lodash`     | Remove package production packages |
+
+### Misc features
+
+```bash
+# Add someone as an owner
+npm owner add USERNAME PACKAGENAME
+```
+
+```bash
+# list packages
+npm ls
+```
+
+```bash
+# Adds warning to those that install a package of old versions
+npm deprecate PACKAGE@"< 0.2.0" "critical bug fixed in v0.2.0"
+```
+
+```bash
+# update all packages, or selected packages
+npm update [-g] PACKAGE
+```
+
+```bash
+# Check for outdated packages
+npm outdated [PACKAGE]
+```
 
 ## Runtime environment (Node.js)
 
@@ -708,6 +773,3 @@ Things to learn:
 + [ ]   Query historic events
 + [ ]   Signing Messages
 
-<!-- Hyperlinks -->
-
-[yarn npm difference]: https://dev.to/samithawijesekara/the-difference-between-npm-and-yarn-2j3p
