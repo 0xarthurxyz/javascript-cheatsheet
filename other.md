@@ -2378,3 +2378,45 @@ tsc index.js --declaration --emitDeclarationOnly
 # Emit a single .js file from two files via compiler options which take string arguments
 tsc app.ts util.ts --target esnext --outfile index.js
 ```
+
+## TypeScript - Integrating with Build Tool
+
+Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/integrating-with-build-tools.html)
+
+### Babel
+
+#### Install
+
+```bash
+npm install @babel/cli @babel/core @babel/preset-typescript --save-dev
+```
+
+#### `.babelrc`
+
+```json
+{
+  "presets": ["@babel/preset-typescript"]
+}
+```
+
+#### Using Command Line Interface
+
+```bash
+./node_modules/.bin/babel --out-file bundle.js src/index.ts
+```
+
+### `package.json`
+
+```json
+{
+  "scripts": {
+    "build": "babel --out-file bundle.js main.ts"
+  },
+}
+```
+
+#### Execute Babel from the command line
+
+```bash
+npm run build
+```
