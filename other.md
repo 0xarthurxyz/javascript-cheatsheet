@@ -1915,3 +1915,40 @@ You validate JSON objects using [jsonlint.com](https://jsonlint.com/).
 Source: [javascript.info](https://javascript.info/object)
 
 +	[ ] Read more details about JavaScript objects.
+
+## Require vs. Import in JavaScript
+
+Source: [stackdiary.com](https://stackdiary.com/require-vs-import-in-javascript/)
+
+One of the main differences between `require` and `import` is that
+
++   `require` can only be used to import modules, whereas 
++   `import` can be used to import both modules and individual exports from those modules.
+
+In general, `import` is preferred over require because it is a more modern and flexible syntax, 
+and it will eventually replace `require` in the language.
+
+For example, if you have a module named `myModule`, you can use `require` to import the 
+entire module like this:
+
+```js
+const myModule = require('myModule');
+```
+
+To import a specific export from the module, you would need to use the `.` notation like this:
+
+```js
+const myFunction = require('myModule').myFunction;
+```
+
+Using `import`, you can import the entire module and all of its exports like this:
+
+```js
+import * as myModule from 'myModule';
+```
+
+Or you can import a specific export like this:
+
+```js
+import {myFunction} from 'myModule';
+```

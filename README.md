@@ -291,42 +291,7 @@ nvm uninstall <the version number>
 Source: [logrocket](https://blog.logrocket.com/how-switch-node-js-versions-nvm/)
 
 
-### Import vs Require
 
-Source: [Stackdiary > Require vs. Import in JavaScript][stackdiary require import]
-
-One of the main differences between `require` and `import` is that
-
-+   `require` can only be used to import modules, whereas 
-+   `import` can be used to import both modules and individual exports from those modules.
-
-In general, `import` is preferred over require because it is a more modern and flexible syntax, 
-and it will eventually replace `require` in the language.
-
-For example, if you have a module named `myModule`, you can use `require` to import the 
-entire module like this:
-
-```js
-const myModule = require('myModule');
-```
-
-To import a specific export from the module, you would need to use the `.` notation like this:
-
-```js
-const myFunction = require('myModule').myFunction;
-```
-
-Using `import`, you can import the entire module and all of its exports like this:
-
-```js
-import * as myModule from 'myModule';
-```
-
-Or you can import a specific export like this:
-
-```js
-import {myFunction} from 'myModule';
-```
 
 ## TypeScript
 
@@ -745,5 +710,4 @@ Things to learn:
 
 <!-- Hyperlinks -->
 
-[stackdiary require import]: https://stackdiary.com/require-vs-import-in-javascript/
 [yarn npm difference]: https://dev.to/samithawijesekara/the-difference-between-npm-and-yarn-2j3p
