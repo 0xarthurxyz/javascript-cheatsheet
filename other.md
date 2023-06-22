@@ -2420,3 +2420,31 @@ npm install @babel/cli @babel/core @babel/preset-typescript --save-dev
 ```bash
 npm run build
 ```
+
+## Setting up eslint, prettier, airbnb-base and typescript
+
+Source: [medium.com](https://medium.com/@ErikKyleNielsen/setting-up-eslint-prettier-airbnb-base-and-typescript-27b3f9538f0d)
+
+Create Config Files
+
+[tsconfig.json](https://github.com/nielse63/eslint-airbnb-base-prettier-typescript-example/blob/main/tsconfig.json)
+
+```json
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "\*": \["./src/\*"\]
+    },
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": \["src"\],
+  "exclude": \["node\_modules", "dist"\]
+}
+```
