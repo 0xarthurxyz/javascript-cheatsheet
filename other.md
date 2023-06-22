@@ -2448,3 +2448,102 @@ Create Config Files
   "exclude": \["node\_modules", "dist"\]
 }
 ```
+
+## TypeScript - Type Declarations
+
+Source: [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html)
+
+> Throughout the sections you've read so far, we've been demonstrating basic TypeScript concepts 
+> using the built-in functions present in all JavaScript runtimes. However, almost all JavaScript 
+> today includes many libraries to accomplish common tasks. Having types for the parts of your 
+> application that *aren't* your code will greatly improve your TypeScript experience. Where do 
+> these types come from?
+
+### What Do Type Declarations Look Like?
+
+Let's say you write some code like this:
+
+```ts
+const k = Math.max(5, 6);
+const j = Math.mix(7, 8);
+// Property 'mix' does not exist on type 'Math'.Property 'mix' does not exist on type 'Math'.
+```
+
+> How did TypeScript know that `max` was present but not `mix`, even though `Math`'s implementation 
+> wasn't part of your code?
+
+> The answer is that there are *declaration files* describing these built-in objects. A declaration 
+> file provides a way to *declare* the existence of some types or values without actually providing 
+> implementations for those values.
+
+### `.d.ts`files
+
+> TypeScript has two main kinds of files. `.ts` files are *implementation* files that contain types 
+> and executable code. These are the files that produce `.js` outputs, and are where you'd 
+> normally write your code.
+
+> `.d.ts` files are *declaration* files that contain *only* type information. These files don't 
+> produce `.js` outputs; they are only used for typechecking. We'll learn more about how to write 
+> our own declaration files later.
+
+### Built-in Type Definitions
+
+> TypeScript includes declaration files for all of the standardized built-in APIs available in 
+> JavaScript runtimes. This includes things like methods and properties of built-in types like 
+> `string` or `function`, top-level names like `Math` and `Object`, and their associated types. 
+> By default, TypeScript also includes types for things available when running inside the browser, 
+> such as `window` and `document`; these are collectively referred to as the DOM APIs.
+
+> TypeScript names these declaration files with the pattern `lib.[something].d.ts`. If you navigate 
+> into a file with that name, you can know that you're dealing with some built-in part of the 
+> platform, not user code.
+
+### External Definitions
+
+> For non-built-in APIs, there are a variety of ways you can get declaration files. How you do 
+> this depends on exactly which library you're getting types for.
+
+#### Bundled Types
+
+> If a library you're using is published as an npm package, it may include type declaration files 
+> as part of its distribution already. You can read the project's documentation to find out, 
+> or simply try importing the package and see if TypeScript is able to automatically resolve the 
+> types for you.
+
+> If you're a package author considering bundling type definitions with your package, you can read 
+> our guide on 
+> [bundling type definitions](https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html#including-declarations-in-your-npm-package).
+
+#### DefinitelyTyped /`@types`
+
+> The [DefinitelyTyped repository](https://github.com/DefinitelyTyped/DefinitelyTyped/) is a 
+> centralized repo storing declaration files for thousands of libraries. The vast majority of 
+> commonly-used libraries have declaration files available on DefinitelyTyped.
+
+> Definitions on DefinitelyTyped are also automatically published to npm under the `@types` scope. 
+> The name of the types package is always the same as the name of the underlying package itself. 
+> For example, if you installed the `react` npm package, you can install its corresponding types 
+> by running
+
+```bash
+npm install --save-dev @types/react
+```
+
+> TypeScript automatically finds type definitions under `node_modules/@types`, so there's no 
+> other step needed to get these types available in your program.
+
+#### Your Own Definitions
+
+> In the uncommon event that a library didn't bundle its own types and didn't have a definition on 
+> DefinitelyTyped, you can write a declaration file yourself. See the appendix 
+> [Writing Declaration Files](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) 
+> for a guide.
+
+> If you want to silence warnings about a particular module without writing a declaration file, 
+> you can also quick declare the module as type `any` by putting an empty declaration for it in a 
+> `.d.ts` file in your project. For example, if you wanted to use a module named 
+> `some-untyped-module` without having definitions for it, you would write:
+
+```ts
+declare module "some-untyped-module";
+```
