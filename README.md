@@ -87,7 +87,17 @@ function.
 		```
 	+	you can validate JSON objects using [jsonlint.com](https://jsonlint.com/)
 
-More info: [other notes](other.md#json-object-v-javascript-object).
+Source: [other notes](other.md#json-object-v-javascript-object).
+
+Use the literal syntax for object creation.
+
+```javascript
+// bad
+const item = new Object();
+
+// good
+const item = {};
+```
 
 ## Package managers (npm)
 
@@ -323,7 +333,7 @@ logPoint(obj);
 logName(obj);
 ```
 
-More info: [other notes](other.md#typescript-for-javac-programmers).
+Source: [other notes](other.md#typescript-for-javac-programmers).
 
 ## React.js
 
