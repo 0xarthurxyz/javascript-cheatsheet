@@ -1952,3 +1952,35 @@ Or you can import a specific export like this:
 ```js
 import {myFunction} from 'myModule';
 ```
+
+## The Difference Between NPM and Yarn
+
+Source: [dev.to](https://dev.to/samithawijesekara/the-difference-between-npm-and-yarn-2j3p)
+
+To see list of commands:
+NPM - `npm`
+Yarn - `yarn`
+
+Install dependencies from package.json:
+NPM - `npm install`
+Yarn - `yarn`
+
+Install a package and add to package.json:
+NPM - `npm install package --save`
+Yarn - `yarn add package`
+
+Install a devDependency:
+NPM - `npm install package --save-dev`
+Yarn - `yarn add package --dev`
+
+Remove a dependency:
+NPM - `npm uninstall package --save`
+Yarn - `yarn remove package`
+
+Upgrade a package to its latest version:
+NPM - `npm update --save`
+Yarn - `yarn upgrade`
+
+Install a package globally:
+NPM - `npm install package -g`
+Yarn - `yarn global add package`
