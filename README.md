@@ -197,7 +197,8 @@ Source: [devhints.io](https://devhints.io/npm)
 | `npm version patch`               | Bump the patch package version by 1 (1.2.3 → 1.2.4)       |
 
 
-`--save` is the default as of npm@5. Previously, using `npm install` without `--save` doesn't update package.json.
+`--save` is the default as of npm@5. Previously, using `npm install` without `--save` doesn't 
+update package.json.
 
 ### Install names
 
