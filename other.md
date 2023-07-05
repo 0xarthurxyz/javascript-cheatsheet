@@ -2436,7 +2436,7 @@ Create Config Files
     "module": "commonjs",
     "baseUrl": "./",
     "paths": {
-      "\*": \["./src/\*"\]
+      "*": ["./src/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -2444,8 +2444,8 @@ Create Config Files
     "strict": true,
     "skipLibCheck": true
   },
-  "include": \["src"\],
-  "exclude": \["node\_modules", "dist"\]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
