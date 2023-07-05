@@ -196,6 +196,7 @@ Source: [devhints.io](https://devhints.io/npm)
 | `npm version minor`               | Bump the minor package version by 1 (1.2.3 → 1.3.0)       |
 | `npm version patch`               | Bump the patch package version by 1 (1.2.3 → 1.2.4)       |
 
+`-D` flag is a shorthand for `--save-dev` that saves the package as a dev-dependency.
 
 `--save` is the default as of npm@5. Previously, using `npm install` without `--save` doesn't 
 update package.json.
