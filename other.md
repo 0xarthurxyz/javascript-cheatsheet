@@ -2547,3 +2547,64 @@ npm install --save-dev @types/react
 ```ts
 declare module "some-untyped-module";
 ```
+
+## Tim Oxley: The Structure of Node.JS Applications - JSConf.Asia 2015
+
+Source: [youtube.com](https://www.youtube.com/watch?v=yD2lMmmjB2E)
+
+[![](https://img.youtube.com/vi/yD2lMmmjB2E/0.jpg)](https://www.youtube.com/watch?v=yD2lMmmjB2E)
+
+Slides: [PDF](/assets/pdf/JSConf2015-modular-vs-monolith.pdf)
+
+1.	"**Flat is better than nested**"
+
+	Ask yourself "Can it be in a statement? If no, can it be a function? If no, can it be a file?
+	If no, can it be a folder? If no, can it be an internal package? If no, can it be an
+	external package?"
+
+	<img src="assets/images/hierarchy-of-modularity.png" width="450">
+
+	Examples:
+
+	+	at statement level: avoid complex `if else` statements
+	+	at function level: avoid nested callbacks
+	+	at class level: avoid multiple levels of inheritance
+
+	Give contributors commit access early to avoid "abandonware" 
+	([openopensource.org](http://openopensource.org/)).
+
+1.	"**Don't get precious about your code.**" 
+
+	The first attempt is almost always wrong.
+	Anecdote about code camp where they have to implement an algorithm 3 times over 3 days.
+
+	<img src="assets/images/first-attempt-will-be-wrong.png" width="250">
+
+1.	"**Defer decisions**". 
+
+	Try to make the least amount of important decisions as possible early.
+	You will have a lot more information later. Just leave it for now.
+
+	> The wrong structure can be more costly than no structure at all.
+
+	> Structure can be more easily extracted from loose structure. Incorrect and complex structure
+	> needs to be torn down before building new structure.
+
+	Do the [simplest thing](http://www.agilenutshell.com/simplest_thing) that could possibly work
+	Don't write it if [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)
+
+1.	"**Avoid premature modularisation.**"
+
+	Abstractions decrease local complexity while increasing global complexity.
+
+	Wait until you use it 
+	[three times](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)) 
+	before extracting it into a reusable function
+
+	[Top-down programming](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design#Programming) 
+	(start by writing your main/entry function first)
+
+	> Don't design your code for extensibility, design your code so it can be deleted
+
+
+More best practices: [timoxley/best-practices](https://github.com/timoxley/best-practices)
