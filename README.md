@@ -10,8 +10,8 @@ Source: [Airbnb style guide](/airbnb.md#references).
 
 Use `const` for all of your references; avoid using `var`.
 
-> Why? This ensures that you can’t reassign your references, which can lead to bugs and difficult 
-> to comprehend code.
+> Why? This ensures that you can’t reassign your references, which can lead to bugs and difficult to
+> comprehend code.
 
 ```js
 // bad
@@ -31,13 +31,13 @@ If you must reassign references, use `let` instead of `var`.
 // bad
 var count = 1;
 if (true) {
-	count += 1;
+    count += 1;
 }
 
 // good, use the let.
 let count = 1;
 if (true) {
-	count += 1;
+    count += 1;
 }
 ```
 
@@ -46,46 +46,47 @@ Both `let` and `const` are _block-scoped_, whereas `var` is _function-scoped_.
 ```js
 // const and let only exist in the blocks they are defined in.
 {
-	let a = 1;
-	const b = 1;
-	var c = 1;
+    let a = 1;
+    const b = 1;
+    var c = 1;
 }
 console.log(a); // ReferenceError
 console.log(b); // ReferenceError
 console.log(c); // Prints 1
 ```
 
-You can see that referencing `a` and `b` will produce a ReferenceError, while `c` contains the 
-number. This is because `a` and `b` are block scoped, while `c` is scoped to the containing 
+You can see that referencing `a` and `b` will produce a ReferenceError, while `c` contains the
+number. This is because `a` and `b` are block scoped, while `c` is scoped to the containing
 function.
 
 ### Objects
 
-+	JavaScript objects
+-   JavaScript objects
 
-	+	are key-value pairs that can contain strings, numbers, arrays, functions, booleans, and 
-		other objects
+    -   are key-value pairs that can contain strings, numbers, arrays, functions, booleans, and
+        other objects
 
-	```js
-	// JavaScript Object
-	const jsObj = {
-		name: 'Alice',
-		age: 30,
-	};
-	```
+    ```js
+    // JavaScript Object
+    const jsObj = {
+        name: "Alice",
+        age: 30,
+    };
+    ```
 
-+	JSON objects
+-   JSON objects
 
-	+	are text-only (that means both keys and values are `strings`)
+    -   are text-only (that means both keys and values are `strings`)
 
-		```js
-		// JSON Object
-		const jsonObj = {
-			"name": "Alice",
-			"age": "30",
-		};
-		```
-	+	you can validate JSON objects using [jsonlint.com](https://jsonlint.com/)
+        ```js
+        // JSON Object
+        const jsonObj = {
+            name: "Alice",
+            age: "30",
+        };
+        ```
+
+    -   you can validate JSON objects using [jsonlint.com](https://jsonlint.com/)
 
 Source: [other notes](other.md#json-object-v-javascript-object).
 
@@ -104,23 +105,22 @@ Use computed property names when creating objects with dynamic property names.
 > Why? They allow you to define all the properties of an object in one place.
 
 ```javascript
-
 function getKey(k) {
-	return `a key named ${k}`;
+    return `a key named ${k}`;
 }
 
 // bad
 const obj = {
-	id: 5,
-	name: 'San Francisco',
+    id: 5,
+    name: "San Francisco",
 };
-obj[getKey('enabled')] = true;
+obj[getKey("enabled")] = true;
 
 // good
 const obj = {
-	id: 5,
-	name: 'San Francisco',
-	[getKey('enabled')]: true,
+    id: 5,
+    name: "San Francisco",
+    [getKey("enabled")]: true,
 };
 ```
 
@@ -129,51 +129,214 @@ Group your shorthand properties at the beginning of your object declaration.
 > Why? It’s easier to tell which properties are using the shorthand.
 
 ```javascript
-const anakinSkywalker = 'Anakin Skywalker';
-const lukeSkywalker = 'Luke Skywalker';
+const anakinSkywalker = "Anakin Skywalker";
+const lukeSkywalker = "Luke Skywalker";
 
 // bad
 const obj = {
-	episodeOne: 1,
-	twoJediWalkIntoACantina: 2,
-	lukeSkywalker,
-	episodeThree: 3,
-	mayTheFourth: 4,
-	anakinSkywalker,
+    episodeOne: 1,
+    twoJediWalkIntoACantina: 2,
+    lukeSkywalker,
+    episodeThree: 3,
+    mayTheFourth: 4,
+    anakinSkywalker,
 };
 
 // good
 const obj = {
-	lukeSkywalker,
-	anakinSkywalker,
-	episodeOne: 1,
-	twoJediWalkIntoACantina: 2,
-	episodeThree: 3,
-	mayTheFourth: 4,
+    lukeSkywalker,
+    anakinSkywalker,
+    episodeOne: 1,
+    twoJediWalkIntoACantina: 2,
+    episodeThree: 3,
+    mayTheFourth: 4,
 };
 ```
 
 Only quote properties that are invalid identifiers.
 
-> Why? In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
+> Why? In general we consider it subjectively easier to read. It improves syntax highlighting, and
+> is also more easily optimized by many JS engines.
 
 ```javascript
 // bad
 const bad = {
-	'foo': 3,
-	'bar': 4,
-	'data-blah': 5,
+    foo: 3,
+    bar: 4,
+    "data-blah": 5,
 };
 
 // good
 const good = {
-	foo: 3,
-	bar: 4,
-	'data-blah': 5,
+    foo: 3,
+    bar: 4,
+    "data-blah": 5,
 };
 ```
 
 Source: [Airbnb style guide](/airbnb.md#objects).
+
+### Spread syntax (`...`)
+
+Source: [developer.mozilla.org][1]
+
+The **spread (`...`)** syntax allows an iterable, such as an array or string, to be expanded in
+places where zero or more arguments (for function calls) or elements (for array literals) are
+expected. In an object literal, the spread syntax enumerates the properties of an object and adds
+the key-value pairs to the object being created.
+
+Spread syntax looks exactly like rest syntax. In a way, spread syntax is the opposite of rest
+syntax. Spread syntax "expands" an array into its elements, while rest syntax collects multiple
+elements and "condenses" them into a single element. See [rest parameters][2] and [rest
+property][3].
+
+Spread syntax can be used when all elements from an object or array need to be included in a new
+array or object, or should be applied one-by-one in a function call's arguments list. There are
+three distinct places that accept the spread syntax:
+
+-   [Function arguments][4] list (`myFunction(a, ...iterableObj, b)`)
+-   [Array literals][5] (`[1, ...iterableObj, '4', 'five', 6]`)
+-   [Object literals][6] (`{ ...obj, key: 'value' }`)
+
+Although the syntax looks the same, they come with slightly different semantics.
+
+Only [iterable][7] values, like [`Array`][8] and [`String`][10] can be spread in  [array
+literals][9] and argument lists. Many objects are not iterable, including all  [plain
+objects][11] that lack a [`Symbol.iterator`][12] method:
+
+```js
+const obj = { key1: "value1" };
+const array = [...obj]; // TypeError: obj is not iterable
+```
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
+[3]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#rest_property
+[4]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_function_calls
+[5]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals
+[6]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals
+[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+[8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#array_literals
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+[12]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator
+
+Example:
+
+```js
+function sum(x, y, z) {
+    return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(sum(...numbers));
+// Expected output: 6
+```
+
+Syntax:
+
+```js
+myFunction(a, ...iterableObj, b)
+[1, ...iterableObj, '4', 'five', 6]
+{ ...obj, key: 'value' }
+```
+
+### Rest parameters (`...theArgs`)
+
+Source: [developer.mozilla.org][13]
+
+The **rest parameter** syntax allows a function to accept an indefinite number of arguments as an
+array, providing a way to represent [variadic functions][14] in JavaScript.
+
+For example:
+
+```js
+function sum(...theArgs) {
+    let total = 0;
+    for (const arg of theArgs) {
+        total += arg;
+    }
+    return total;
+}
+
+console.log(sum(1, 2, 3));
+// Expected output: 6
+```
+
+Syntax:
+
+```js
+function f(a, b, ...theArgs) {
+    // …
+}
+```
+
+A function definition's last parameter can be prefixed with `...`, which will cause all remaining
+(user supplied) parameters to be placed within an [`Array`][8] object.
+
+```js
+function myFun(a, b, ...manyMoreArgs) {
+    console.log("a", a);
+    console.log("b", b);
+    console.log("manyMoreArgs", manyMoreArgs);
+}
+
+myFun("one", "two", "three", "four", "five", "six");
+
+// Console Output:
+// a, one
+// b, two
+// manyMoreArgs, ["three", "four", "five", "six"]
+```
+
+A function definition can only have one rest parameter, and the rest parameter must be the last
+parameter in the function definition.
+
+```js
+function wrong1(...one, ...wrong) {}
+function wrong2(...wrong, arg2, arg3) {}
+```
+
+The rest parameter is not counted towards the function's [`length`][15] property.
+
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
+[14]: https://en.wikipedia.org/wiki/Variadic_function
+[15]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length
+
+### Rest property in destructuring assignments
+
+Source: [developer.mozilla.org][16]
+
+You can end a destructuring pattern with a rest property `...rest`. This pattern will store all
+remaining properties of the object or array into a new object or array.
+
+```js
+const { a, ...others } = { a: 1, b: 2, c: 3 };
+console.log(others); // { b: 2, c: 3 }
+
+const [first, ...others2] = [1, 2, 3];
+console.log(others2); // [2, 3]
+```
+
+The rest property must be the last in the pattern, and must not have a trailing comma.
+
+```js
+const [a, ...b] = [1, 2, 3];
+
+// SyntaxError: rest element may not have a trailing comma
+// Always consider using rest operator as the last element
+```
+
+[16]:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#rest_property
 
 ## Package managers (npm)
 
@@ -182,11 +345,11 @@ Source: [devhints.io](https://devhints.io/npm)
 ### Package management
 
 | Command                           | Description                                               |
-| ---                               | ---                                                       |
+| --------------------------------- | --------------------------------------------------------- |
 | `npm i`                           | Alias for `npm install`                                   |
 | `npm install`                     | Install everything in package.json                        |
 | `npm install --production`        | Install everything in package.json, except devDependecies |
-| ---                               | ---                                                       |  
+| ---                               | ---                                                       |
 | `npm install lodash`              | Install a package                                         |
 | `npm install --save-dev lodash`   | Install as devDependency                                  |
 | `npm install --save-exact lodash` | Install with exact                                        |
@@ -198,13 +361,13 @@ Source: [devhints.io](https://devhints.io/npm)
 
 `-D` flag is a shorthand for `--save-dev` that saves the package as a dev-dependency.
 
-`--save` is the default as of npm@5. Previously, using `npm install` without `--save` doesn't 
-update package.json.
+`--save` is the default as of npm@5. Previously, using `npm install` without `--save` doesn't update
+package.json.
 
 ### Install names
 
 | Command                              | Description             |
-| ---                                  | ---                     |
+| ------------------------------------ | ----------------------- |
 | `npm i sax`                          | NPM package             |
 | `npm i sax@latest`                   | Specify tag `latest`    |
 | `npm i sax@3.0.0`                    | Specify version `3.0.0` |
@@ -223,29 +386,28 @@ update package.json.
 
 ### Listing
 
-| Command                 | Description                                                         |
-| ---                     | ---                                                                 |
-| `npm list`              | Lists the installed versions of all dependencies in this software   | 
-| `npm list -g --depth 0` | Lists the installed versions of all globally installed packages     | 
-| `npm view`              | Lists the latest versions of all dependencies in this software      | 
-| `npm outdated`          | Lists only the dependencies in this software which are outdated     |
+| Command                 | Description                                                       |
+| ----------------------- | ----------------------------------------------------------------- |
+| `npm list`              | Lists the installed versions of all dependencies in this software |
+| `npm list -g --depth 0` | Lists the installed versions of all globally installed packages   |
+| `npm view`              | Lists the latest versions of all dependencies in this software    |
+| `npm outdated`          | Lists only the dependencies in this software which are outdated   |
 
 ### Updating
 
 | Command             | Description                |
-| ---                 | ---                        |
+| ------------------- | -------------------------- |
 | `npm update`        | Update production packages |
 | `npm update --dev`  | Update dev packages        |
 | `npm update -g`     | Update global packages     |
 | ---                 | ---                        |
 | `npm update lodash` | Update a package           |
 
-
 ### Removing
 
-| Command             | Description                        |
-| ---                 | ---                                |
-| `npm rm lodash`     | Remove package production packages |
+| Command         | Description                        |
+| --------------- | ---------------------------------- |
+| `npm rm lodash` | Remove package production packages |
 
 ### Misc features
 
@@ -282,37 +444,42 @@ npm outdated [PACKAGE]
 2. Clone the repo
 3. Add `.gitignore` (example below)
 
-  ```gitignore
-  node_modules/
-  .env
-  .vscode
-  ```
+```gitignore
+node_modules/
+.env
+.vscode
+```
 
 4. Run `npm init` (takes you through mini questionnaire in CLI and creates file)
-5. Run `npm install <your_required_package_name>` to install and add dependencies to the `package.json` file
+5. Run `npm install <your_required_package_name>` to install and add dependencies to the
+   `package.json` file
 
 ### Package.json
 
 To make package.json files from from scratch:
-- run `npm init` (takes you through mini questionnaire in CLI and creates file)
-- run  `npm install <package>` (automatically adds to dependency in the package.json file)
+
+-   run `npm init` (takes you through mini questionnaire in CLI and creates file)
+-   run `npm install <package>` (automatically adds to dependency in the package.json file)
 
 ### NVM (node version manager)
 
-> [Node Version Manager is a tool that helps us manage Node versions](https://github.com/nvm-sh/nvm) and is a convenient way to install Node. Think of it as npm or Yarn that helps manage Node packages, but instead of packages, NVM manages Node versions.
+> [Node Version Manager is a tool that helps us manage Node versions](https://github.com/nvm-sh/nvm)
+> and is a convenient way to install Node. Think of it as npm or Yarn that helps manage Node
+> packages, but instead of packages, NVM manages Node versions.
 
 Source: [logrocket](https://blog.logrocket.com/how-switch-node-js-versions-nvm/)
 
 ### Displaying a list of Node.js versions
 
-> We can now view all the versions we downloaded so far; currently, we have three Node versions installed using NVM.
+> We can now view all the versions we downloaded so far; currently, we have three Node versions
+> installed using NVM.
 >
 > To see the full list, run the following command:
 >
 > ```bash
 > nvm ls
 > ```
-> 
+>
 > The list then appears:
 
 ```bash
@@ -357,17 +524,17 @@ nvm uninstall <the version number>
 
 Source: [logrocket](https://blog.logrocket.com/how-switch-node-js-versions-nvm/)
 
-
 ## React.js
 
 Resources:
 
-- React docs > Learn React (beta) > [Quick Start](https://beta.reactjs.org/learn)
-- React docs > [Hello world](https://reactjs.org/docs/hello-world.html)
+-   React docs > Learn React (beta) > [Quick Start](https://beta.reactjs.org/learn)
+-   React docs > [Hello world](https://reactjs.org/docs/hello-world.html)
 
 ### React Elements
 
-React elements are written just like regular HTML elements. You can write any valid HTML element in React:
+React elements are written just like regular HTML elements. You can write any valid HTML element in
+React:
 
 ```js
 <h1>My Header</h1>
@@ -375,12 +542,13 @@ React elements are written just like regular HTML elements. You can write any va
 <button>My button</button>
 ```
 
-Source: [freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
+Source:
+[freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
 
 Styling: Inline styles are not written as plain strings, but as properties on objects:
 
 ```js
-<h1 style={{ fontSize: 24, margin: '0 auto', textAlign: 'center' }}>My header</h1>
+<h1 style={{ fontSize: 24, margin: "0 auto", textAlign: "center" }}>My header</h1>
 ```
 
 ### React Components
@@ -389,33 +557,33 @@ Styling: Inline styles are not written as plain strings, but as properties on ob
 
 Here is the basic syntax of a React function component:
 
-1. Component names **must start with a capital letter** (that is, MyComponent, instead of myComponent)
+1. Component names **must start with a capital letter** (that is, MyComponent, instead of
+   myComponent)
 2. Components, unlike JavaScript functions, **must return JSX**.
 
 ```js
 function App() {
-  return (
-     <div>Hello world!</div>
-  );
-} 
+    return <div>Hello world!</div>;
+}
 ```
 
-Source: [freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
-
+Source:
+[freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
 
 ### React Props
 
-React components can accept data passed to them in **objects** called `props`. Props are passed from the parent component to a child component.
+React components can accept data passed to them in **objects** called `props`. Props are passed from
+the parent component to a child component.
 
 Here we are passing a prop `name` from App to the User component.
 
 ```js
 function App() {
-  return <User name="John Doe" />
+    return <User name="John Doe" />;
 }
 
 function User(props) {
-  return <h1>Hello, {props.name}</h1>; // Hello, John Doe!
+    return <h1>Hello, {props.name}</h1>; // Hello, John Doe!
 }
 ```
 
@@ -423,16 +591,16 @@ Or simpler (if only one attribute):
 
 ```js
 function App() {
-  return <User name="John Doe" />
+    return <User name="John Doe" />;
 }
 
 function User({ name }) {
-  return <h1>Hello, {name}!</h1>; // Hello, John Doe!
+    return <h1>Hello, {name}!</h1>; // Hello, John Doe!
 }
 ```
 
-Source: [freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
-
+Source:
+[freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
 
 ### React conditionals
 
@@ -440,38 +608,38 @@ If statement:
 
 ```js
 function App() {
-	const isAuthUser = useAuth();
+    const isAuthUser = useAuth();
 
-  if (isAuthUser) {
-    // if our user is authenticated, let them use the app
-    return <AuthApp />;
-  }
+    if (isAuthUser) {
+        // if our user is authenticated, let them use the app
+        return <AuthApp />;
+    }
 
-  // if user is not authenticated, show a different screen
-  return <UnAuthApp />;
+    // if user is not authenticated, show a different screen
+    return <UnAuthApp />;
 }
 ```
 
-Source: [freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
-
+Source:
+[freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
 
 Ternary list:
 
 ```js
 function App() {
-	const isAuthUser = useAuth();
+    const isAuthUser = useAuth();
 
-  return (
-    <>
-      <h1>My App</h1>
-      {isAuthUser ? <AuthApp /> : <UnAuthApp />}
-    </>
-  ) 
+    return (
+        <>
+            <h1>My App</h1>
+            {isAuthUser ? <AuthApp /> : <UnAuthApp />}
+        </>
+    );
 }
 ```
 
-Source: [freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
-
+Source:
+[freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
 
 ### React Lists
 
@@ -481,23 +649,25 @@ Lists of React components can be output using the `.map()` function.
 
 ```js
 function SoccerPlayers() {
-  const players = ["Messi", "Ronaldo", "Laspada"];
+    const players = ["Messi", "Ronaldo", "Laspada"];
 
-  return (
-    <div>
-      {players.map((playerName) => (
-        <SoccerPlayer key={playerName} name={playerName} />
-      ))}
-    </div>
-  );
+    return (
+        <div>
+            {players.map((playerName) => (
+                <SoccerPlayer key={playerName} name={playerName} />
+            ))}
+        </div>
+    );
 }
 ```
 
-Source: [freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
+Source:
+[freeCodeCamp - React cheat sheet for 2022](https://www.freecodecamp.org/news/the-react-cheatsheet/)
 
 ## EthersJS
 
-These are noob notes for the [EthersJS](https://github.com/ethers-io/ethers.js) web3 library (mostly notes-to-self). They are incomplete by default.
+These are noob notes for the [EthersJS](https://github.com/ethers-io/ethers.js) web3 library (mostly
+notes-to-self). They are incomplete by default.
 
 ### Provider (read-only)
 
@@ -507,7 +677,8 @@ Syntax:
 new ethers.Contract(address, abi, signerOrProvider);
 ```
 
-_Source: [EthersJS > Contract > Creating instances](https://docs.ethers.org/v5/api/contract/contract/#Contract--creating)_
+_Source:
+[EthersJS > Contract > Creating instances](https://docs.ethers.org/v5/api/contract/contract/#Contract--creating)_
 
 Creates instance of Provider:
 
@@ -520,7 +691,9 @@ const chainId = "42220";
 const provider = new ethers.providers.JsonRpcProvider(rpcUrl, chainId);
 ```
 
-Temporary bug: Some [issue](https://stackoverflow.com/questions/75385248/typeerror-cannot-read-properties-of-undefined-reading-jsonrpcprovider) in ethers v6 with `jsonRpcProvider`.
+Temporary bug: Some
+[issue](https://stackoverflow.com/questions/75385248/typeerror-cannot-read-properties-of-undefined-reading-jsonrpcprovider)
+in ethers v6 with `jsonRpcProvider`.
 
 ### Signer (read and write)
 
@@ -545,12 +718,11 @@ const signer = new Wallet(privateKey, provider);
 
 ### Contract functions
 
-Syntax: You can add specific human-readable ABI (simply copy function signature from smart contract):
+Syntax: You can add specific human-readable ABI (simply copy function signature from smart
+contract):
 
 ```js
-const abi = [
-    "function getCurrentReleasedTotalAmount() public view returns (uint256)",
-];
+const abi = ["function getCurrentReleasedTotalAmount() public view returns (uint256)"];
 ```
 
 E.g. this smart contract function:
@@ -569,19 +741,22 @@ Example:
 ```js
 // Instantiate: Contract
 const contractAddress = process.env.SMART_CONTRACT_ADDRESS;
-const abi = [
-    "function getCurrentReleasedTotalAmount() public view returns (uint256)",
-];
+const abi = ["function getCurrentReleasedTotalAmount() public view returns (uint256)"];
 let contract = new ethers.Contract(contractAddress, abi, signer);
 ```
 
 ### Contract variables
 
-To query public variables via ethers, you can simply add getter function in your ABI with parentheses.
+To query public variables via ethers, you can simply add getter function in your ABI with
+parentheses.
 
-> The compiler automatically creates getter functions for all **public** state variables. For the contract given below, the compiler will generate a function called `data` that does not take any arguments and returns a `uint`, the value of the state variable `data`.
+> The compiler automatically creates getter functions for all **public** state variables. For the
+> contract given below, the compiler will generate a function called `data` that does not take any
+> arguments and returns a `uint`, the value of the state variable `data`.
 
-Source: [Solidity docs > Getter Functions](https://docs.soliditylang.org/en/v0.8.4/contracts.html#getter-functions), originally found via [Stack Overflow](https://ethereum.stackexchange.com/a/99587)
+Source:
+[Solidity docs > Getter Functions](https://docs.soliditylang.org/en/v0.8.4/contracts.html#getter-functions),
+originally found via [Stack Overflow](https://ethereum.stackexchange.com/a/99587)
 
 E.g.
 
@@ -599,42 +774,44 @@ For the following public variable:
 uint256 public totalWithdrawn;
 ```
 
-Source: [Celo Monorepo > ReleaseGold.sol](https://github.com/celo-org/celo-monorepo/blob/75c223a1b5296ac0fecdb54fb29c52432cf3fece/packages/protocol/contracts/governance/ReleaseGold.sol#L63-L64)
+Source:
+[Celo Monorepo > ReleaseGold.sol](https://github.com/celo-org/celo-monorepo/blob/75c223a1b5296ac0fecdb54fb29c52432cf3fece/packages/protocol/contracts/governance/ReleaseGold.sol#L63-L64)
 
 ### Contract structs
 
-Human-readable structs are not currently supported in ethers, but the following workaround makes them work:
+Human-readable structs are not currently supported in ethers, but the following workaround makes
+them work:
 
 > While struct syntax is not supported, this works for me
-> 
+>
 > ```ts
 > const User = "(address user, string email)";
 > const abi = [
->   `event registered(${User} user)`,
->   `function getId(${User} user) view returns (uint id)`,
->   `function getUser(uint id) view returns (${User} user)`,
->   `function addUser(${User} user)`,
+>     `event registered(${User} user)`,
+>     `function getId(${User} user) view returns (uint id)`,
+>     `function getUser(uint id) view returns (${User} user)`,
+>     `function addUser(${User} user)`,
 > ];
 > const Relationship = `(${User} a, ${User} b, string relationship)`;
 > ```
 
-Source: [Github > ethers-io > Issues](https://github.com/ethers-io/ethers.js/issues/315#issuecomment-1035675960)
+Source:
+[Github > ethers-io > Issues](https://github.com/ethers-io/ethers.js/issues/315#issuecomment-1035675960)
 
 Example:
 
 ```js
 // Define struct-like variable
-const ReleaseSchedule = "(uint256 releaseStartTime, uint256 releaseCliff, uint256 numReleasePeriods, uint256 releasePeriod, uint256 amountReleasedPerPeriod)";
+const ReleaseSchedule =
+    "(uint256 releaseStartTime, uint256 releaseCliff, uint256 numReleasePeriods, uint256 releasePeriod, uint256 amountReleasedPerPeriod)";
 // Reference struct-like variable in ABI
-const abi = [
-    `function releaseSchedule() public view returns (${ReleaseSchedule})`
-];
+const abi = [`function releaseSchedule() public view returns (${ReleaseSchedule})`];
 // Query struct
 const releaseSchedule = await releaseGoldContract.releaseSchedule();
-console.log( releaseSchedule.toString() );
+console.log(releaseSchedule.toString());
 ```
 
-For the 
+For the
 
 ```java
 struct ReleaseSchedule {
@@ -654,7 +831,8 @@ struct ReleaseSchedule {
 ReleaseSchedule public releaseSchedule;
 ```
 
-Source: [Celo Monorepo > ReleaseGold.sol](https://github.com/celo-org/celo-monorepo/blob/75c223a1b5296ac0fecdb54fb29c52432cf3fece/packages/protocol/contracts/governance/ReleaseGold.sol#L21-L32)
+Source:
+[Celo Monorepo > ReleaseGold.sol](https://github.com/celo-org/celo-monorepo/blob/75c223a1b5296ac0fecdb54fb29c52432cf3fece/packages/protocol/contracts/governance/ReleaseGold.sol#L21-L32)
 
 ### Read-only methods
 
@@ -670,14 +848,11 @@ const provider = new ethers.providers.JsonRpcProvider(rpcUrl, chainId);
 
 // Instantiate: Contract
 const contractAddress = process.env.SMART_CONTRACT_ADDRESS;
-const abi = [
-    "function getCurrentReleasedTotalAmount() public view returns (uint256)",
-];
+const abi = ["function getCurrentReleasedTotalAmount() public view returns (uint256)"];
 let contract = new ethers.Contract(contractAddress, abi, signer);
 
 // Query function in ReleaseGold.sol contract
-const getReleasedAmountReceipt =
-    await releaseGoldContract.getCurrentReleasedTotalAmount();
+const getReleasedAmountReceipt = await releaseGoldContract.getCurrentReleasedTotalAmount();
 
 // Visualize response
 console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
@@ -685,8 +860,7 @@ console.log(ethers.utils.formatEther(getReleasedAmountReceipt.toString()));
 
 Things to learn:
 
-+ [ ]   State changing methods
-+ [ ]   Listening to events
-+ [ ]   Query historic events
-+ [ ]   Signing Messages
-
+-   [ ] State changing methods
+-   [ ] Listening to events
+-   [ ] Query historic events
+-   [ ] Signing Messages
