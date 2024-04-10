@@ -2,17 +2,16 @@
 
 This is a cheat sheet on JavaScript (mostly notes-to-self). They are incomplete by default.
 
-## Basics (from exercism.org)
+## Basics (from [exercism.org](https://exercism.org/tracks/javascript))
 
-> [!TIP]
-> Most of the concepts and text below is taken from the JavaScript track on
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/basics)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
 > [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
 > license, which is included in this repository as well.
 
-
 ### (Re-)Assignment
-
-Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/basics)
 
 There are a few primary ways to assign values to names in JavaScript - using variables or constants.
 Typically, variables are written
@@ -57,10 +56,10 @@ However, [non-primitive](https://developer.mozilla.org/en-US/docs/Glossary/Prim
 still be mutated.
 
 ```js
-const MY_MUTABLE_VALUE_CONSTANT = { food: 'apple' };
+const MY_MUTABLE_VALUE_CONSTANT = { food: "apple" };
 
 // This is possible
-MY_MUTABLE_VALUE_CONSTANT.food = 'pear';
+MY_MUTABLE_VALUE_CONSTANT.food = "pear";
 
 MY_MUTABLE_VALUE_CONSTANT;
 // => { food: "pear" }
@@ -132,15 +131,239 @@ test file uses `import` to access these, which is how it can test the implemen
 export const MY_VALUE = 10;
 
 export function add(num1, num2) {
-  return num1 + num2;
+    return num1 + num2;
 }
 
 // file.spec.js
-import { MY_VALUE, add } from './file';
+import { MY_VALUE, add } from "./file";
 
 add(MY_VALUE, 5);
 // => 15
 ```
+
+## Numbers (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/numbers)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### About numbers
+
+There are two different kinds of numbers in JavaScript - numbers and "bigints"
+
+Numbers are the most used, and represent numeric data type in the double-precision 64-bit
+floating-point format.
+
+-   `number`: a numeric data type in the double-precision 64-bit floating-point format (IEEE 754).
+    Examples
+    are `-6`, `-2.4`, `0`, `0.1`, `1`, `3.14`, `16.984025`, `25`, `976`, `1024.0` and `500000`.
+-   `bigint`: a numeric data type that can represent *integers* in the arbitrary precision format.
+    Examples are `-12n`, `0n`, `4n`, and `9007199254740991n`.
+
+```js
+let numericValue = 42;
+// => 42
+```
+
+A number literal like `42` in JavaScript code is a floating-point value, not an integer. There is no
+separate integer type in common everyday use. The `bigint` type is not designed to replace
+the `number` type for everyday uses. `42` is still a `Number`, not a `BigInt`.
+
+Numbers may also be expressed in literal forms like `0b101`, `0o13`, `0x0A`. Learn more on numeric
+lexical
+grammar [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#numeric_literals).
+
+### Special Notations
+
+#### Exponential Notation
+
+The E-notation indicates a number that should be multiplied by 10 raised to a given power. The
+format of E-notation is to have a number, followed by `e` or `E`, than by the power of 10 to
+multiply by.
+
+```js
+const num = 3.125e7;
+// => 31250000
+// The notation essentially says, "Take 3.125 and multiply it by 10^7".
+```
+
+E-notation can also be used to represent very small numbers:
+
+```js
+const num = 325987e-6; // Equals to 0. 325987
+// The notation essentially says, "Take 325987 and multiply it by 10^-6.
+```
+
+#### Underscore Notation
+
+Underscores can be used to make large numbers easier to read for the user. The compiler will
+completely ignore the underscores.
+
+```
+const num = 1_000_000; // You can read this as 1,000,000
+console.log(num);
+// => 1000000
+```
+
+### Built-in Object
+
+There are two built-in objects that are useful when dealing with numbers:
+
+-   [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
+    static properties for common / useful values, static methods
+    for [type-checking](https://exercism.org/tracks/javascript/concepts/type-checking) and [type-conversion](https://exercism.org/tracks/javascript/concepts/type-conversion),
+    instance methods
+    for [type-conversion](https://exercism.org/tracks/javascript/concepts/type-conversion) and [formatting numbers as strings](https://exercism.org/tracks/javascript/concepts/string-formatting).
+-   [`Math`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math):
+    properties and methods for mathematical constants and functions, does **not** work
+    with `BigInt`.
+
+`Math` also includes methods for rounding numbers. You can read more about the available rounding
+options in this [javascript.info article on rounding](https://javascript.info/number#rounding).
+
+```js
+Math.floor(234.34); // => 234
+Math.ceil(234.34); // => 235
+```
+
+The `Number` built-in global `object` is *also* a global `function` that can be used to
+convert *almost anything* number-like to a `number`. It is less forgiving
+than *parsing* a `string` to a `number`.
+
+```js
+const date = new Date("December 17, 1995 03:24:00");
+const unix = Number(date);
+
+unix;
+// => 819199440000
+```
+
+There are three types of maximum (and minimum / maximum negative) values for numbers in JavaScript:
+
+-   `VALUE`: given by `Number.MAX_VALUE` and `Number.MIN_VALUE`
+-   `INFINITY`: given by `Number.POSITIVE_INFINITY` and `Number.NEGATIVE_INFINITY`
+-   `SAFE_INTEGER`: given by `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER`
+
+Because of how numbers in JavaScript are implemented, **not** every number
+between `Number.MIN_VALUE` and `Number.MAX_VALUE` can be represented. However, *every* number
+between `Number.MIN_SAFE_INTEGER - 1` and `Number.MAX_SAFE_INTEGER + 1` **can** be represented.
+
+### Special Numbers Values
+
+JavaScript has several special number values:
+
+-   Two error values, `NaN` and `Infinity`.
+-   Two values for zero, `+0` and `-0`.
+
+#### NaN - Not a Number
+
+The error value `NaN`(aka "Not a Number") is produced in the following cases.
+
+-   A number could not be parsed:
+
+    ```js
+    Number("123"); // => 123
+    Number("Hello, World!"); // => NaN
+    ```
+
+-   An operation failed:
+
+    ```js
+    Math.sqrt(-64); // => NaN
+    ```
+
+-   One of the operands is NaN:
+    ```js
+    NaN + 69; // => NaN
+    ```
+
+`NaN` is the only value that is not equal to itself:
+
+```js
+NaN === NaN; // => false
+```
+
+If you want to check whether a value is `NaN`, you have to use the global function `isNaN()`:
+
+```js
+isNaN(NaN); // => true
+isNaN(123); // => false
+```
+
+#### Infinity
+
+`Infinity` is an error value indicating one of two problems:
+
+-   A number can't be represented because its magnitude is too large.
+
+    ```js
+    Math.pow(2, 1024); // => Infinity
+    ```
+
+-   A division by zero has happened.
+    ```js
+    6 / 0; // => Infinity
+    -6 / 0; // => -Infinity
+    ```
+
+`Infinity` is larger than any other number (except `NaN`). Similarly, `-Infinity` is smaller than
+any other number (except `NaN`)
+
+The global function `isFinite()` allows you to check whether a value is an actual number (neither
+infinite nor `NaN`):
+
+```js
+isFinite(80085); // => true
+isFinite(Infinity); // => false
+isFinite(NaN); // => false
+```
+
+#### The Two Zeros
+
+`+0` or `-0` are distinct numbers in JavaScript. They can be produced if you represented a number,
+that is so small that it is indistinguishable from 0. The signed zero allows you to record "from
+which direction" you approached zero; that is, what sign the number had before it was considered
+zero. It is best practise to pretend there's only one zero.
+
+### Comparison
+
+Numbers are considered equal if they have the same value.
+
+```js
+1 == 1.0;
+// => true
+
+1 === 1.0;
+// => true
+// Remember, all numbers are floating-points, so this is
+// different syntax for the exact same value.
+
+1 === 1n;
+// => false
+// Strictly checking a number against a bigint will always result
+// in false.
+```
+
+See [comparison](https://exercism.org/tracks/javascript/concepts/comparison) for more information on
+comparisons in general and comparing numeric values in JavaScript.
+
+### Pitfalls
+
+Because numbers in JavaScript are floating-point numbers, all math using these values is
+floating-point math. Therefore, in JavaScript:
+
+```js
+0.1 + 0.2 === 0.3;
+// => false
+```
+
+See [0.30000000000000004.com](https://0.30000000000000004.com/) for a brief explanation
+and [Appendix D](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) of Oracle's
+Numerical Computation Guide "What Every Computer Scientist Should Know About Floating-Point
+Arithmetic" for an in-depth explanation.
 
 ## Other notes
 
