@@ -431,7 +431,7 @@ To simplify it to our context, JavaScript uses the PEDMAS (Parentheses, Exponent
 Division/Multiplication, Addition/Subtraction) rule we've learnt in elementary math classes.
 
 ```js
-const result = 3 ** 3 + 9 * 4 / (3 - 1);
+const result = 3 ** 3 + (9 * 4) / (3 - 1);
 // => 3 ** 3 + 9 * 4/2
 // => 27 + 9 * 4/2
 // => 27 + 18
@@ -451,6 +451,382 @@ x += 25; // x is now 30
 
 let y = 31;
 y %= 3; // y is now 1
+```
+
+## Strings (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/strings)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### About Strings
+
+A *string* is the JavaScript data type to store text data. There is no separate data type for an
+individual character.
+
+### Creating a String
+
+You create a
+string [literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#literals) by
+wrapping the text in single quotes or double quotes. On Exercism, single quotes are used.
+
+```js
+"Hello, World!";
+"Hello, World!";
+```
+
+Some special characters of the text need to be prefixed with a backslash `\`,
+see [escape sequences on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences).
+
+```js
+const text = "I'm having fun.\nWhat about you?";
+console.log(text);
+// => I'm having fun.
+// => What about you?
+```
+
+Besides single and double quotes, you can also create a string by wrapping the text in backticks.
+This syntax allows to include single or double quotes and even new lines without the need to escape
+them. It also allows to embed expressions,
+see [Template Strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) for
+more details.
+
+```js
+`A multi-line string
+with 'single quotes'
+and "double quotes"`;
+```
+
+### Strings as Lists of Characters
+
+A string can be treated as a list of characters where the first character has index `0`. You can
+access an individual character of the string using square brackets and the index of the letter you
+want to retrieve. Alternatively, there is also the `charAt` method.
+
+```js
+"cat"[1];
+// => 'a'
+
+"cat".charAt(2);
+// => 't'
+```
+
+You can determine the number of characters in a string by accessing the `length` property.
+
+```js
+"cat".length;
+// => 3
+```
+
+### Concatenation and Methods
+
+The simplest way to concatenate strings is to use the addition operator `+`.
+
+```js
+"I like" + " " + "cats.";
+// => "I like cats."
+```
+
+Strings provide a lot of helper methods,
+see [MDN Docs on String Methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#Instance_methods) for
+a full list. The following list shows some commonly used helpers.
+
+-   [`toUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) and [`toLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) \-
+    change the case of all characters
+-   [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim) \-
+    remove whitespace at the beginning and end
+-   [`includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes), [`startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) and [`endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) \-
+    determine whether another string is part of the given string
+-   [`slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) \-
+    extract a section of the string
+
+### Strings are Immutable
+
+Applying the methods above will never change the original string. Instead a new string will be
+created and returned. Strings (and other primitive data types) are immutable in JavaScript. That
+also means you cannot assign a different character at some index using the bracket syntax shown
+above (like you would in arrays).
+
+```js
+const str = "cat";
+str[1] = "u"; // fails silently
+console.log(str);
+// => 'cat'
+```
+
+## Booleans (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/booleans)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+JavaScript uses `true` and `false` to represent the two truth values of logic.
+
+In JavaScript, for each of the three logical operations (AND, OR and NOT) there is a corresponding
+operator: `&&`, `||` and `!`. In general, there are rules regarding the order of the operations and,
+in this case, `!` (negation) is applied first, and then `&&` (conjunction) and
+then `||` (disjunction).
+
+The order of operations between the operators can be overcome by using an operator with higher
+precedence: `( )`, named the 'Grouping operator' or simply said 'parentheses'. As a matter of fact,
+the `( )` operator has the highest precedence of all JavaScript operators. More information about
+operators precedence is
+found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence).
+
+## Arrays (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/arrays)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### About Arrays
+
+In JavaScript, an array is a list-like structure with no fixed length which can hold any type of
+primitives or objects, even mixed types. It includes the `length` property and also lots
+of [useful methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Instance_methods) for
+traversing and mutating the array.
+
+To create an array, add elements between square brackets `[]`. To read from the array, put the index
+in square brackets `[]` after the identifier. The indices of an array start at zero.
+
+For example:
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names[1];
+// => Laura
+```
+
+Arrays can also be created using the constructor syntax, but for most uses, the array literal syntax
+is recommended.
+
+```js
+const names = new Array();
+names.push("Jack", "Laura", "Paul", "Megan");
+
+names[1];
+// => Laura
+```
+
+Arrays cannot use `strings` as element indexes but must use integers
+([`number`](https://exercism.org/tracks/javascript/concepts/numbers)). Setting or accessing via
+non-integers using bracket notation (or dot notation) will not set or retrieve an element from the
+array list itself, but will set or access a variable associated with that array's object property
+collection. The array's object properties and list of array elements are separate, and the array's
+traversal and mutation operations cannot be applied to these named properties.
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.length;
+// => 4
+
+// Properties can be set on arrays using bracket ['property'] or
+// dot .property notation, and this will affect the length, as
+// shown below.
+
+names.magician = "Elyse";
+names.length;
+// => 4
+
+// The property shows up when logging the array, making it seem
+// that the property is somehow incorporated in the array.
+
+names;
+// => ["Jack", "Laura", "Paul", "Megan", magician: "Elyse"]
+
+// However, be aware. Properties added via non-numeric keys are
+// NOT part of the array's internal list, and are not traversed
+// or mutated when using one of the traversal or mutation
+// operations.
+
+names.forEach((name) => console.log(name));
+// => Jack
+// => Laura
+// => Paul
+// => Megan
+```
+
+### Deleting items from an array
+
+Arrays in JavaScript are regular `objects`, and items can be deleted using the `delete` keyword.
+However, this does not change the *length* of the array and leaves a hole of `empty`. In other
+languages, this is similar to a sparse array. The `empty` holes are skipped when using traversal or
+mutation operations.
+
+```
+const names = ['Jack', 'Laura', 'Paul', 'Megan'];
+delete names[1];
+
+names;
+// =>  ["Jack", empty, "Paul", "Megan"]
+
+names.length;
+// => 4
+
+names.forEach((name) => console.log(name));
+// => Jack
+// => Paul
+// => Megan
+
+```
+
+If there should be no holes, and if the `length` should reflect the number of items that will be
+traversed or mutated, use `splice` instead.
+
+> The `splice()` method changes the contents of an array by removing or replacing existing elements
+> and/or adding new elements in place.
+
+Source:
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+
+For example:
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.splice(1, 1);
+
+names;
+// =>  ["Jack", "Paul", "Megan"]
+
+names.length;
+// => 3
+
+names.forEach((name) => console.log(name));
+// => Jack
+// => Paul
+// => Megan
+```
+
+### Array length can be mutated
+
+The `length` property of an array is connected to the list of items the array holds. It can be
+mutated. When the length is increased, it creates `empty` holes, that are not considered when
+traversing or mutating the array. When the length is decreased, it *removes* the elements at the end
+of the array.
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.length = 6;
+
+names;
+// => ["Jack", "Laura", "Paul", "Megan", empty × 2]
+
+names.length = 2;
+// =>  ["Jack", "Laura"]
+```
+
+### Checking if something is an Array
+
+Because arrays are `objects`, `typeof names` gives `"object"`. To check if something is an Array,
+use `Array.isArray`:
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+
+typeof names;
+// => "object"
+
+Array.isArray(names);
+// => true
+
+const object = {};
+Array.isArray(object);
+// => false
+```
+
+You might be tempted to use `names instanceof Array`, and that can work, but not under all
+circumstances. Read [this article](https://web.mit.edu/jwalden/www/isArray.html) for more
+information.
+
+### Array Methods
+
+Some of
+the [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) that
+are available on every Array object can be used to add or remove from the array. Here are a few of
+them:
+
+#### push
+
+> The `push()` method adds one or more elements to the end of an array and returns the new length of
+> the array.
+
+Source:
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.push("Jill"); // => 5
+names;
+// => ['Jack', 'Laura', 'Paul', 'Megan', 'Jill']
+```
+
+#### pop
+
+> The `pop()` method removes the last element from an array and returns that element. This method
+> changes the length of the array.
+
+Source:
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.pop(); // => 'Megan'
+names;
+// => ['Jack', 'Laura', 'Paul']
+```
+
+#### shift
+
+> The `shift()` method removes the first element from an array and returns that removed element.
+> This method changes the length of the array.
+
+Source:
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.shift(); // => 'Jack'
+names;
+// => ['Laura', 'Paul', 'Megan']
+```
+
+#### unshift
+
+> The unshift() method adds one or more elements to the beginning of an array and returns the new
+> length of the array.
+
+Source:
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.unshift("Jill"); // => 5
+names;
+// => ['Jill', 'Jack', 'Laura', 'Paul', 'Megan']
+```
+
+#### splice
+
+> The splice() method changes the contents of an array by removing or replacing existing elements
+> and/or adding new elements in place. This method returns an array containing the deleted elements.
+
+Source:
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+
+```js
+const names = ["Jack", "Laura", "Paul", "Megan"];
+names.splice(2, 1, "Jill"); // => ['Paul']
+names;
+// => ['Jack', 'Laura', 'Jill', 'Megan']
 ```
 
 ## Other notes
