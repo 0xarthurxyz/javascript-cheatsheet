@@ -1231,7 +1231,9 @@ outside the header, the code does not yield the expected result.
 ```js
 let sum = 0;
 for (var i = 1; i < 4; i++) {
-  setTimeout(function () { sum += i; }, 1000);
+    setTimeout(function () {
+        sum += i;
+    }, 1000);
 }
 // eventually sum will be 12 instead of 6 (1+2+3)
 ```
@@ -1240,7 +1242,9 @@ for (var i = 1; i < 4; i++) {
 let sum = 0;
 let i;
 for (i = 1; i < 4; i++) {
-  setTimeout(function () { sum += i; }, 1000);
+    setTimeout(function () {
+        sum += i;
+    }, 1000);
 }
 // same here, eventually sum will be 12 instead of 6 (1+2+3)
 ```
@@ -1257,10 +1261,115 @@ own variable `i` that still holds the correct value.
 ```js
 let sum = 0;
 for (let i = 1; i < 4; i++) {
-  setTimeout(function () { sum += i; }, 1000);
+    setTimeout(function () {
+        sum += i;
+    }, 1000);
 }
 // eventually sum will be 6 (1+2+3) as expected
 ```
+
+## While Loops
+
+(from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/while-loops)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### General Syntax
+
+With a while loop, you can execute code repeatably as long as a certain condition is fulfilled.
+
+It is written with the `while` keyword followed by a condition wrapped in round brackets and a code
+block that contains the *body* of the loop wrapped in curly brackets.
+
+```js
+while (condition) {
+  // code that is executed repeatedly as long as the condition is
+  // true
+}
+```
+
+JavaScript also has a do-while loop. Here the condition is checked after the loop body was executed.
+This is useful when the condition depends on evaluations done in the body.
+
+```js
+do {
+  // The code here will always be executed once and then
+  // repeatedly while the condition is true.
+} while (condition);
+```
+
+### Break
+
+Inside a loop body, you can use the `break` keyword to stop the execution of the loop entirely. This
+is often used in combination with `true` as the condition. With that, you can control when the loop
+should stop from any place inside the loop body.
+
+```js
+const winningNumber = 7;
+
+while (true) {
+  const num = readUserGuess();
+  if (num === winningNumber) {
+    break;
+  }
+}
+```
+
+The `break` keyword cannot be used inside a function that is nested in the loop, see
+the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break#break_within_functions) for
+an example.
+
+### Continue
+
+In contrast to `break`, the keyword `continue` only stops the execution of the current iteration and
+continues with the next one. With `continue` you can often avoid wrapping big parts of the loop body
+in an if-statement.
+
+```js
+let i = 0;
+
+while (i < 100) {
+  i = i + 2;
+
+  if (i % 3 === 0) {
+    continue;
+  }
+
+  // The code here will only be executed when i was not divisible
+  // by 3 in the check above.
+}
+```
+
+### Infinite Loops
+
+A loop that is (theoretically) repeated forever is created when the loop condition is always
+fulfilled and no break or return statement is reached in the loop body. The execution has to be
+terminated from the outside. Depending on the environment in which such code runs, this will be done
+automatically or needs manual intervention.
+
+```js
+let i = 0;
+
+while (i < 100) {
+  if (i % 3 === 0) {
+    continue;
+  }
+
+  i = i + 2;
+}
+
+// This loop runs forever since the variable i does not change
+// anymore after it is divisible by 3 the first time.
+```
+
+Spotting infinite loops might seem trivial in this toy example, but is not always that easy with
+more complex code. It is good practice to thoroughly think about whether your condition eventually
+becomes false or whether your break or return statement is reached.
 
 ## Other notes
 
