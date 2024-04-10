@@ -2,12 +2,13 @@
 
 This is a cheat sheet on JavaScript (mostly notes-to-self). They are incomplete by default.
 
-## Concepts
+## Basics (from exercism.org)
 
 > [!TIP]
 > Most of the concepts and text below is taken from the JavaScript track on
 > [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
 > license, which is included in this repository as well.
+
 
 ### (Re-)Assignment
 
