@@ -829,6 +829,272 @@ names;
 // => ['Jack', 'Laura', 'Jill', 'Megan']
 ```
 
+## Conditionals (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/conditionals)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### General Syntax
+
+A common way to conditionally execute logic in JavaScript is the if-statement. It consists of
+the `if` keyword, a condition wrapped in round brackets and a code block wrapped in curly brackets.
+The code block will only be executed if the condition evaluates to `true`.
+
+```js
+if (condition) {
+    // code that is executed if "condition" is true
+}
+```
+
+It can be used stand-alone or combined with the `else` keyword.
+
+```js
+if (condition) {
+    // code that is executed if "condition" is true
+} else {
+    // code that is executed otherwise
+}
+```
+
+### Nested If-Statements
+
+To nest another condition into the `else` statement you can use `else if`. Note that there is
+no `elseif` keyword in JavaScript. Instead, write `else` followed by another `if` statement.
+
+```js
+if (condition1) {
+    // code that is executed if "condition1" is true
+} else if (condition2) {
+    // code that is executed if "condition2" is true
+    // but "condition1" was false
+} else {
+    // code that is executed otherwise
+}
+```
+
+Theoretically, you can nest as many additional conditions as you want. In practice you would use
+a [`switch` statement](https://exercism.org/tracks/javascript/concepts/conditionals-switch) instead
+in these cases.
+
+```js
+if (condition1) {
+    // ...
+} else if (condition2) {
+    // ...
+} else if (condition3) {
+    // ...
+} else if (condition4) {
+    // ...
+} else {
+    // ...
+}
+```
+
+### Condition
+
+When constructing complex conditions, refer to
+the [operator precedence table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#table) to
+avoid unnecessary brackets.
+
+```js
+if (num >= 0 && num < 1) {
+  // ...
+}
+
+// The inner brackets are obsolete because relational operators
+// have higher precedence than logical operators.
+<!-- prettier-ignore-start -->
+
+if ((num >= 0) && (num < 1)) {
+  // ...
+}
+<!-- prettier-ignore-end -->
+```
+
+Also, consider using additional variables to make the code more readable.
+
+```js
+const isPositive = num >= 0;
+const isSmall = num < 1;
+if (isPositive && isSmall) {
+    // ...
+}
+```
+
+In JavaScript, the condition does not have to be of type boolean. If any other type than boolean is
+provided in a boolean context like the if-statement, JavaScript will implicitly convert the value to
+boolean. Refer to
+the [type conversion concept](https://exercism.org/tracks/javascript/concepts/type-conversion) for
+details on which values are *truthy* and *falsy*, respectively.
+
+```js
+const num = 4;
+if (num) {
+    // this code block will be executed because 4 is truthy
+}
+```
+
+### Short-Hand Notations
+
+If you only want to execute one statement in the code block for `if` or `else`, it is possible in
+JavaScript to omit the curly brackets.
+
+```js
+if (condition) doSomething();
+
+// or
+
+if (condition) doSomething();
+```
+
+This is sometimes used when checking for an error condition for example. In general, it is not
+recommended because it is easy to forget to add the brackets back in when adding a second statement
+that should depend on the same condition.
+
+When writing functions, it is a common pattern to omit the `else` block and use an early `return` in
+the `if` block instead. In many cases, this reduces *nesting* and makes the code more readable and
+easier to follow.
+
+```js
+function checkNumber(num) {
+    let message = "";
+
+    if (num === 0) {
+        message = "You passed 0, please provide another number.";
+    } else {
+        message = "Thanks for passing such a nice number.";
+    }
+
+    return message;
+}
+
+// Can also be written as ...
+function checkNumber(num) {
+    if (num === 0) {
+        return "You passed 0, please provide another number.";
+    }
+
+    return "Thanks for passing such a nice number.";
+}
+```
+
+## Comparison (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/comparison)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### Comparing Numbers
+
+In JavaScript numbers can be compared using the following relational and equality operators.
+
+| Comparison             | Operator  |
+| ---------------------- | --------- |
+| Greater than           | `a > b`   |
+| Greater than or equals | `a >= b`  |
+| Less than              | `a < b`   |
+| Less than or equals    | `a <= b`  |
+| (Strict) Equals        | `a === b` |
+| Not (strict) equals    | `a !== b` |
+
+The result of the comparison is always a boolean value, so either `true` or `false`.
+
+```js
+1 < 3;
+// => true
+
+2 !== 2;
+// => false
+
+1 === 1.0;
+// => true
+// All numbers are floating-points, so this is different syntax
+// for the exact same value.
+```
+
+### Comparing Strings
+
+In JavaScript, the comparison operators above can also be used to compare strings. In that case, a
+dictionary (lexicographical) order is applied. You can find a list of the exact order of all the
+characters [here](https://www.fileformat.info/info/charset/UTF-16/list.htm).
+
+```js
+"Apple" > "Pear";
+// => false
+
+"a" < "above";
+// => true
+
+"a" === "A";
+// => false
+```
+
+You need to be careful when you compare two variables that appear to contain numeric values but are
+of type string. Due to the dictionary order, the result will not be the same as comparing values of
+type `Number`.
+
+```js
+10 < 2;
+// => false
+
+"10" < "2";
+// => true (because "1" comes before "2")
+```
+
+Another way to compare strings is
+the [localeCompare](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare) method.
+It allows setting a variety
+of [options](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#parameters) to
+adjust the way strings are compared.
+
+### Strict Equality
+
+You might wonder about the three equal signs for checking equality in JavaScript. `===` represents
+the check for *strict equality* which means that no type conversion is performed and values of
+different types are always unequal.
+
+```js
+"3" === 3;
+// => false
+// The value on the left has type string, the value on the right
+// has type number.
+
+1 === 1n;
+// => false
+// The value on the left has type number, the value on the right
+// has type bigint.
+```
+
+Using `===` and `!==` is the recommended way of checking equality in JavaScript.
+
+### Avoiding Implicit Type Conversion
+
+There is also `==` and `!=` which represents checking for *loose equality*. You should avoid it
+because it will apply implicit type conversion before performing the comparison. The outcomes in
+these cases are hard to predict and sometimes not what you would expect. You can read more about
+it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality).
+
+```js
+0 == false;
+// => true
+```
+
+In theory, you can also compare values of different types (e.g., `"1" < 2`). Then the values will be
+implicitly converted to determine whether the result is true or false. Just as checking for loose
+equality, this is also not recommended for the same reason as mentioned above.
+
+What should you do instead? You can
+apply [explicit type conversion](https://exercism.org/tracks/javascript/concepts/type-conversion).
+With that, you can then ensure values have the correct type before performing the comparison. Then
+your code will be easier to understand and less error-prone.
+
 ## Other notes
 
 ### References (variables)
