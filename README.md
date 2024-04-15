@@ -1832,7 +1832,7 @@ let name;
 name === undefined;
 // => true
 
-typeof name === 'undefined';
+typeof name === "undefined";
 // => true
 ```
 
@@ -1860,10 +1860,10 @@ Otherwise `undefined` is returned.
 
 ```js
 const obj = {
-  address: {
-    street: 'Trincomalee Highway',
-    city: 'Batticaloa',
-  },
+    address: {
+        street: "Trincomalee Highway",
+        city: "Batticaloa",
+    },
 };
 
 obj.residence;
@@ -1920,6 +1920,309 @@ amount = amount ?? 1;
 amount = 0;
 amount = amount ?? 1;
 // => 0
+```
+
+## Type Conversion (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/type-conversion)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### About Type Conversion
+
+In JavaScript, values may be of different types. Changing the type of a variable can be done by
+explicit *type conversion*. Besides that, JavaScript also performs *type coercion* (implicit type
+conversion) when the context requires it.
+
+### Type Conversion
+
+JavaScript does not have a construct to cast into a (different) type like many other languages but
+some built-in helpers can be used instead. Most notably, `Boolean`, `Number` and `String` can be
+used as functions to convert a value to the respective type.
+
+#### Converting to a Boolean (Truthy/Falsy Values)
+
+With `Boolean(value)` you can convert any value to a boolean. There is a fixed set of values, so
+called *falsy* values, that convert to `false`. Most importantly, `false`, `0`, empty
+string, `null`, `undefined` and `NaN` are falsy.
+
+For all other values, `Boolean` returns `true`. These values are called *truthy*.
+
+```
+Boolean(-1);
+// => true
+
+Boolean(0);
+// => false
+
+Boolean(' ');
+// => true
+
+Boolean('');
+// => false
+
+```
+
+Note that because of the described rules, `'0'`, `'false'`, `[]` and `{}` are **truthy** in
+JavaScript.
+
+#### Converting to a Number
+
+`Number(value)` can be used to convert a value to a number. Whitespaces at the beginning and the end
+of a string are ignored and an empty string is converted to `0`. If you try to convert a
+non-primitive value or a string that does not represent a number, the result
+is `NaN` ([Not-A-Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN)).
+
+```
+Number('  -12.34  ');
+// => -12.34
+
+Number('1,2');
+// => NaN
+
+Number('');
+// => 0
+
+Number({ num: 123 });
+// => NaN
+
+```
+
+#### Converting to a String
+
+With `String(value)` you can convert a value to a string. The result is what you would expect it to
+be for primitive values.
+
+```
+String(12.34);
+// => '12.34'
+
+String(false);
+// => 'false'
+
+String(null);
+// => 'null'
+
+String(undefined);
+// => 'undefined'
+
+```
+
+For arrays, the `String` function will apply the string conversion for each element and join the
+results with a comma. You can also apply
+the [`join` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) yourself,
+e.g. to customize the separator. Note that in these cases `null` and `undefined` will be converted
+to an empty string.
+
+```
+String([42, null, true, 'abc']);
+// => '42,,true,abc'
+
+```
+
+For objects, by default `String` returns an unhelpful text.
+
+```
+String({ key: 'value' });
+// => '[object Object]'
+
+```
+
+### Type Coercion
+
+In certain contexts, JavaScript will automatically convert a value to another data type before it
+evaluates some statement. This implicit conversion is called *type coercion*.
+
+#### Boolean Context
+
+When a non-boolean value is used in a boolean context, JavaScript will apply the same rules as
+the `Boolean` function to implicitly convert the value.
+
+Coercion to boolean commonly occurs for
+
+-   the condition of an [if statement](https://exercism.org/tracks/javascript/concepts/conditionals)
+-   the first operand of
+    the [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) `?`
+-   the operand of the logical NOT operator `!`
+-   the operands of the logical AND `&&` and OR `||` operators (the result of the expression is one
+    of the operands, not necessarily a boolean)
+
+```
+const num = 0;
+if (num) {
+  // this block is NOT executed because 0 is falsy
+}
+
+```
+
+#### String Context
+
+If the addition operator `+` is used for primitive values and one operand is a string, the other one
+will be coerced into a string as well. The conversion logic is the same as when using
+the `String` function. Afterwards, the two strings are concatenated.
+
+```
+let name;
+'hello ' + name;
+// => 'hello undefined'
+
+```
+
+#### Numeric Context
+
+Many operators coerce the operands into numbers (if necessary) according to the logic of
+the `Number` function explained above.
+
+-   Arithmetic operators: `+` (if no string is involved), `-`, `*`, `/`, `%`, `**`
+-   Unary plus and unary negation operators: `+`, `-`
+-   Relational operators (for non-string operands): `>`, `>=`, `<`, `<=`
+-   Bitwise operators: `|`, `&`, `^`, `~`
+
+Refer to
+the [MDN list of operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators) for
+more details about any of those operators.
+
+To avoid mistakes, it is good practice to always call `Number` explicitly before applying those
+operators.
+
+## Functions (from [exercism.org](https://exercism.org/tracks/javascript))
+
+Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/functions)
+
+> [!TIP]  
+> Most of the concepts and text below are taken from the JavaScript track on
+> [exercism.org](https://exercism.org/tracks/javascript). The material is licensed under a MIT
+> license, which is included in this repository as well.
+
+### About Functions
+
+A function is a block of organized, reusable code that is used to perform some action. There are
+multiple ways to define functions in JavaScript. Here we will look at *function
+declarations* and *function expressions*. Other possibilities
+like [arrow functions](https://exercism.org/tracks/javascript/concepts/arrow-functions) will be
+covered in other concepts.
+
+### Function Declaration
+
+The standard way of defining a function in JavaScript is a *function declaration*, also
+called *function definition* or *function statement*.
+
+It consists of the `function` keyword, the name of the function, and a comma-separated list of
+parameters in round brackets. This is followed by the function body (collection of statements that
+defines what a function does) wrapped in curly brackets.
+
+```js
+function someName(param1, param2, param3) {
+    // ...
+}
+```
+
+In JavaScript, a function is invoked (called) by stating the function name followed by parentheses
+that contain the arguments.
+
+```js
+someName(arg1, arg2, arg3);
+```
+
+### Parameters
+
+When working with parameters inside the function body, be aware of possible side effects.
+
+-   Values
+    of [primitive data types](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) are *immutable*.
+    The original value is never affected by what happens to the argument in the function body.
+-   For all other values (objects, arrays, functions), a reassignment will not affect the original
+    value. However, if you modify such an argument (e.g. add a key to an object), that also modifies
+    the original value that was passed in.
+
+By default, all parameters defined in the function declaration are optional in JavaScript. If you
+provide fewer arguments than there are parameters, the missing arguments will be `undefined` inside
+the function,
+see [Null and Undefined](https://exercism.org/tracks/javascript/concepts/null-undefined). In many
+cases, it makes sense to assign a more appropriate default value than `undefined`. This can be done
+by specifying default parameters directly in the function definition.
+
+```js
+function someName(param1 = defaultValue1, param2 = defaultValue2) {
+    // ...
+}
+```
+
+### Return Statement
+
+A `return` statement ends the function execution and specifies a value to be returned to the
+function caller. A function can have multiple `return` statements.
+
+```js
+function checkNumber(num) {
+    if (num === 0) {
+        return "You passed 0, please provide another number.";
+    }
+
+    return "Thanks for passing such a nice number.";
+}
+```
+
+The result of a function that `return`s no value or does not have a `return` statement
+is `undefined`. There are no implicit `return`s in JavaScript.
+
+```js
+function nakedReturn(a) {
+    a * 2;
+    return;
+}
+
+nakedReturn(1);
+// => undefined
+
+function noReturn(a) {
+    a * 2;
+}
+
+noReturn(1);
+// => undefined
+```
+
+In JavaScript, you can only return exactly one value. If you want to pass more information, you need
+to combine it into one entity first, usually into
+an [object](https://exercism.org/tracks/javascript/concepts/objects), or
+an [array](https://exercism.org/tracks/javascript/concepts/arrays).
+
+```js
+function divide(a, b) {
+    return {
+        quotient: Math.floor(a / b),
+        remainder: a % b,
+    };
+}
+```
+
+### Function Expression
+
+A function declaration is a standalone statement. But sometimes it is helpful to define a function
+as part of another expression, e.g., in an assignment, as a function parameter
+([callback](https://exercism.org/tracks/javascript/concepts/callbacks)) or as value in
+an [object](https://exercism.org/tracks/javascript/concepts/objects). This can be done with a
+function expression. It has the same syntax as a function declaration, only that the function name
+can be omitted to create an *anonymous function*.
+
+```js
+const someFunction = function (param) {
+    // ...
+};
+
+someOtherFunction(function (param) {
+    // ...
+});
+
+const obj = {
+    someFunction: function (param) {
+        // ...
+    },
+};
 ```
 
 ## Other notes
