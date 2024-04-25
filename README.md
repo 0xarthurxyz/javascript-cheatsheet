@@ -1,6 +1,7 @@
 # JavaScript (Cheat Sheet)
 
-This is a cheat sheet on JavaScript (mostly notes-to-self). They are incomplete by default.
+> [!NOTE]  
+> This is a cheat sheet on JavaScript (mostly notes-to-self). They are incomplete by default.
 
 ## Basics (from [exercism.org](https://exercism.org/tracks/javascript))
 
