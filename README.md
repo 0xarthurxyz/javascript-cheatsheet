@@ -1274,9 +1274,8 @@ Source:
 [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
 
 Heuristic:
-
-- `of` gives you values (not '**o**'bjects)
 - `in` gives you indexes (not '**i**'terables)
+- `of` gives you values (not '**o**'bjects)
 
 The **`for...of`** statement executes a loop that operates on a sequence of values sourced from
 an [iterable object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol).
