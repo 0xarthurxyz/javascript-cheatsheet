@@ -829,6 +829,71 @@ names;
 // => ['Jack', 'Laura', 'Jill', 'Megan']
 ```
 
+#### sort (strings in alphabetical order)
+
+> [!TIP]  
+> Remember `sort()` sorts in alphabetical order without a compare function.
+
+Source:
+[geeksforgeeks.org](https://www.geeksforgeeks.org/sort-an-array-in-reverse-order-javascript/#approach-1-using-sort-methodand-reverse-method)
+
+```js
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+arr.sort();
+
+console.log(arr);
+// => [ 1, 10, 2, 3, 4, 5,  6, 7, 8, 9]
+```
+
+```js
+const arr = ["c", "d", "b", "a"];
+
+arr.sort();
+
+console.log(arr);
+// => [ 'a', 'b', 'c', 'd' ]
+```
+
+#### sort (number in ascending and descending order)
+
+Source:
+[geeksforgeeks.org](https://www.geeksforgeeks.org/sort-an-array-in-reverse-order-javascript/#approach-1-using-sort-methodand-reverse-method)
+
+1. Sort normally then reverse:
+
+    1. Sort the array using
+      the [`sort()`](https://www.geeksforgeeks.org/javascript-array-sort-method/) method
+    1. Pass a callback function as a parameter inside the sort method `(a, b) => a - b`. This comparator
+      function sorts in ascending order.
+    1. Reverse the array using
+      the [reverse()](https://www.geeksforgeeks.org/javascript-array-reverse-method/) method.
+
+    ```js
+    const arr1 = [24.6, 23.7, 18.9, 76.5];
+
+    arr1.sort((a, b) => a - b);
+    arr1.reverse();
+
+    console.log(arr1);
+    // =>  [ 76.5, 24.6, 23.7, 18.9 ]
+    ```
+
+1. (Or) Sort in reverse order to start:
+
+    1. Sort the array using
+      the [`sort()`](https://www.geeksforgeeks.org/javascript-array-sort-method/) method
+    1. Pass a callback function as a parameter inside the sort method `(a, b) => b - a`. This comparator
+      function sorts in descending order.
+
+    ```js
+    const arr2 = [54, 23, 12, 97, 100];
+    arr2.sort((a, b) => b - a);
+
+    console.log(arr2);
+    // =>  [ 100, 97, 54, 23, 12 ]
+    ```
+
 ## Conditionals (from [exercism.org](https://exercism.org/tracks/javascript))
 
 Source: [exercism.org](https://exercism.org/tracks/javascript/concepts/conditionals)
@@ -1274,6 +1339,7 @@ Source:
 [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
 
 Heuristic:
+
 - `in` gives you indexes (not '**i**'terables)
 - `of` gives you values (not '**o**'bjects)
 
@@ -1345,9 +1411,14 @@ for (const number of set) {
 
 ### `for...in` Looping over enumerables (object keys, indexes)
 
-Source: [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
+Source:
+[MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
 
-The **`for...in`** statement iterates over all [enumerable string properties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties) of an object (ignoring properties keyed by [symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)), including inherited enumerable properties.
+The **`for...in`** statement iterates over
+all [enumerable string properties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties) of
+an object (ignoring properties keyed
+by [symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)),
+including inherited enumerable properties.
 
 Objects:
 
